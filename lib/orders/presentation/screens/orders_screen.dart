@@ -1,68 +1,79 @@
-// import 'package:app/orders/application/order_state.dart';
-// import 'package:app/orders/application/providers/order_notifier_provider.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:go_router/go_router.dart';
+import 'package:app/authentication/application/providers/auth_notifier_provider.dart';
+import 'package:app/orders/application/providers/order_notifier_provider.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-// class OrdersScreen extends ConsumerWidget {
-//   const OrdersScreen({super.key});
+class OrdersScreen extends ConsumerStatefulWidget {
+  const OrdersScreen({super.key});
 
-//   @override
-//   Widget build(BuildContext context, WidgetRef ref) {
-//     final orderState = ref.watch(orderNotifierProvider);
+  @override
+  ConsumerState<OrdersScreen> createState() => _OrdersScreenState();
+}
 
-//     // الاستماع للأخطاء وعرض Snackbar
-//     ref.listen<OrderState>(orderNotifierProvider, (previous, next) {
-//       if (next is OrderError) {
-//         ScaffoldMessenger.of(context).showSnackBar(
-//           SnackBar(content: Text(next.message)),
-//         );
-//       }
-//     });
+class _OrdersScreenState extends ConsumerState<OrdersScreen> {
+  @override
+  void initState() {
+    super.initState();
 
-//     // طلب تحميل الطلبات عند فتح الشاشة (إذا لم يكن محمّل بعد)
-//     ref.read(orderNotifierProvider.notifier).fetchOrders();
+    Future.microtask(() {
+      final shop = ref.read(authNotifierProvider); // ✅ الصواب
+      final shopeId = shop.shopeId;
+      if (shopeId != null) {
+        ref.read(orderNotifierProvider.notifier).loadOrders(shopeId);
+      }
+    });
+  }
 
-//     if (orderState is OrderInitial || orderState is OrderLoading) {
-//       return Scaffold(
-//         body: Center(child: CircularProgressIndicator()),
-//       );
-//     } else if (orderState is OrderLoaded) {
-//       if (orderState.orders.isEmpty) {
-//         return Scaffold(
-//           body: Center(child: Text('لا توجد طلبات')),
-//         );
-//       }
-//       return Scaffold(
-//         // appBar: AppBar(title: const Text('الطلبات')),
-//         body: ListView.builder(
-//           itemCount: orderState.orders.length,
-//           itemBuilder: (context, index) {
-//             final order = orderState.orders[index];
-//             return ListTile(
-//               title: Text(order.productName),
-//               subtitle: Text('العميل: ${order.custumName}\n'
-//                   'الكمية: ${order.quantity}\n'
-//                   'الحالة: ${order.status.name}'),
-//               isThreeLine: true,
-//               onTap: () {
-//                 context.pushNamed(
-//                   'orderDetailsScreen',
-//                   pathParameters: {'id': order.id},
-//                 );
-//                 // TODO: انتقل إلى شاشة تفاصيل الطلب مع تمرير order.id
-//               },
-//             );
-//           },
-//         ),
-//       );
-//     } else if (orderState is OrderError) {
-//       return Scaffold(
-//         // appBar: AppBar(title: const Text('الطلبات')),
-//         body: Center(child: Text('حدث خطأ: ${orderState.message}')),
-//       );
-//     } else {
-//       return const SizedBox.shrink();
-//     }
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    final state = ref.watch(orderNotifierProvider);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(child: const Text('الطلبات')),
+      ),
+      body: Builder(
+        builder: (context) {
+          if (state.isLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (state.error != null) {
+            return Center(
+              child: Text('حدث خطأ: ${state.error}'),
+            );
+          }
+
+          if (state.orders.isEmpty) {
+            return const Center(
+              child: Text('لا توجد طلبات حالياً'),
+            );
+          }
+
+          return ListView.builder(
+            itemCount: state.orders.length,
+            itemBuilder: (context, index) {
+              final order = state.orders[index];
+              return Card(
+                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: ListTile(
+                  title: Text('طلب #${order.id.substring(0, 6)}'),
+                  subtitle: Text('الحالة: ${order.orderState}\n'
+                      'المبلغ: ${order.totalAmount}'),
+                  trailing: const Icon(Icons.arrow_forward_ios),
+                  onTap: () {
+                    context.pushNamed(
+                      'orderDetailsScreen',
+                      pathParameters: {'id': order.id},
+                    );
+                  },
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+}

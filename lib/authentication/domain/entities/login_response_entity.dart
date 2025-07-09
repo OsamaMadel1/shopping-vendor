@@ -1,11 +1,11 @@
 class LoginResponseEntity {
   final String token;
-  final String shopId;
+  final String shopeId;
   final String userName;
 
   const LoginResponseEntity({
     required this.token,
-    required this.shopId,
+    required this.shopeId,
     required this.userName,
   });
 }

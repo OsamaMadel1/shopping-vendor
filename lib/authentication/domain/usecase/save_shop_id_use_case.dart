@@ -1,11 +1,11 @@
 import 'package:app/authentication/domain/repositories/auth_repositroy.dart';
 
-class SaveShopIdUseCase {
+class SaveshopeIdUseCase {
   final AuthRepository repository;
 
-  SaveShopIdUseCase(this.repository);
+  SaveshopeIdUseCase(this.repository);
 
-  Future<void> call(String shopId) {
-    return repository.saveShopId(shopId);
+  Future<void> call(String shopeId) {
+    return repository.saveshopeId(shopeId);
   }
 }

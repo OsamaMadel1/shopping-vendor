@@ -6,14 +6,14 @@ enum AuthStatus { initial, loading, authenticated, unauthenticated, error }
 class AuthState extends Equatable {
   final AuthStatus status;
   final String? token;
-  final String? shopId;
+  final String? shopeId;
   final String? userName;
   final String? error;
 
   const AuthState({
     required this.status,
     this.token,
-    this.shopId,
+    this.shopeId,
     this.userName,
     this.error,
   });
@@ -23,19 +23,19 @@ class AuthState extends Equatable {
   AuthState copyWith({
     AuthStatus? status,
     String? token,
-    String? shopId,
+    String? shopeId,
     String? userName,
     String? error,
   }) {
     return AuthState(
       status: status ?? this.status,
       token: token ?? this.token,
-      shopId: shopId ?? this.shopId,
+      shopeId: shopeId ?? this.shopeId,
       userName: userName ?? this.userName,
       error: error,
     );
   }
 
   @override
-  List<Object?> get props => [status, token, shopId, userName, error];
+  List<Object?> get props => [status, token, shopeId, userName, error];
 }

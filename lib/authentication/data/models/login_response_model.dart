@@ -2,12 +2,12 @@ import 'package:app/authentication/domain/entities/login_response_entity.dart';
 
 class LoginResponseModel {
   final String token;
-  final String shopId;
+  final String shopeId;
   final String userName;
 
   LoginResponseModel({
     required this.token,
-    required this.shopId,
+    required this.shopeId,
     required this.userName,
   });
 
@@ -16,7 +16,7 @@ class LoginResponseModel {
     print("🧪 FULL RESPONSE: $data");
     return LoginResponseModel(
       token: data['token'],
-      shopId: data['shopId'],
+      shopeId: data['shopeId'],
       userName: data['userName'],
     );
   }
@@ -24,7 +24,7 @@ class LoginResponseModel {
   LoginResponseEntity toEntity() {
     return LoginResponseEntity(
       token: token,
-      shopId: shopId,
+      shopeId: shopeId,
       userName: userName,
     );
   }

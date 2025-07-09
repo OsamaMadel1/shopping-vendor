@@ -1,29 +1,37 @@
-// // domain/entities/order_entity.dart
+class OrderItemEntity {
+  final String id;
+  final String productName;
+  final String orderId;
+  final String productId;
+  final int quantity;
+  final double price;
 
-// enum OrderStatus {
-//   pending,
-//   inProgress,
-//   inDelivery,
-//   completed,
-//   cancelled,
-// }
+  OrderItemEntity({
+    required this.id,
+    required this.productName,
+    required this.orderId,
+    required this.productId,
+    required this.quantity,
+    required this.price,
+  });
+}
 
-// class OrderEntity {
-//   final String id;
-//   final String productName;
-//   final String custumName;
-//   final int quantity;
-//   final double totalPrice;
-//   final DateTime orderDate;
-//   final OrderStatus status;
+class OrderEntity {
+  final String id;
+  final String customerId;
+  final String shopeId;
+  final DateTime orderDate;
+  final double totalAmount;
+  final String orderState;
+  final List<OrderItemEntity> orderItems;
 
-//   OrderEntity({
-//     required this.id,
-//     required this.productName,
-//     required this.custumName,
-//     required this.quantity,
-//     required this.totalPrice,
-//     required this.orderDate,
-//     required this.status,
-//   });
-// }
+  OrderEntity({
+    required this.id,
+    required this.customerId,
+    required this.shopeId,
+    required this.orderDate,
+    required this.totalAmount,
+    required this.orderState,
+    required this.orderItems,
+  });
+}

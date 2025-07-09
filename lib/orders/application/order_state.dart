@@ -1,17 +1,25 @@
-// import 'package:app/orders/domain/entities/order_entity.dart';
+import 'package:app/orders/domain/entities/order_entity.dart';
 
-// class OrderState {}
+class OrderState {
+  final bool isLoading;
+  final List<OrderEntity> orders;
+  final String? error;
 
-// class OrderInitial extends OrderState {}
+  const OrderState({
+    this.isLoading = false,
+    this.orders = const [],
+    this.error,
+  });
 
-// class OrderLoading extends OrderState {}
-
-// class OrderLoaded extends OrderState {
-//   final List<OrderEntity> orders;
-//   OrderLoaded(this.orders);
-// }
-
-// class OrderError extends OrderState {
-//   final String message;
-//   OrderError(this.message);
-// }
+  OrderState copyWith({
+    bool? isLoading,
+    List<OrderEntity>? orders,
+    String? error,
+  }) {
+    return OrderState(
+      isLoading: isLoading ?? this.isLoading,
+      orders: orders ?? this.orders,
+      error: error,
+    );
+  }
+}

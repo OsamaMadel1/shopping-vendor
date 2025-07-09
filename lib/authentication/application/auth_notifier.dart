@@ -19,14 +19,14 @@ class AuthNotifier extends StateNotifier<AuthState> {
   final SaveTokenUseCase saveToken;
   final GetTokenUseCase getToken;
   final ClearTokenUseCase clearToken;
-  final SaveShopIdUseCase saveShopId;
-  final GetShopIdUseCase getshopId;
+  final SaveshopeIdUseCase saveshopeId;
+  final GetshopeIdUseCase getshopeId;
   final SaveUserNameUseCase saveUserName;
   final GetUserNameUseCase getUserName;
 
   AuthNotifier({
-    required this.saveShopId,
-    required this.getshopId,
+    required this.saveshopeId,
+    required this.getshopeId,
     required this.saveUserName,
     required this.getUserName,
     required this.registerUser,
@@ -36,14 +36,14 @@ class AuthNotifier extends StateNotifier<AuthState> {
     required this.clearToken,
   }) : super(AuthState.initial());
 
-  String? get currentshopId => state.shopId;
+  String? get currentshopeId => state.shopeId;
   String? get currentUserName => state.userName;
   Future<void> register(UserRegisterEntity user) async {
     print('🟡 [Register] بدأ تنفيذ التسجيل...');
     try {
       state = state.copyWith(status: AuthStatus.loading, error: null);
-      final shopId = await registerUser(user);
-      print('✅ [Register] تم إنشاء المستخدم بنجاح: $shopId');
+      final shopeId = await registerUser(user);
+      print('✅ [Register] تم إنشاء المستخدم بنجاح: $shopeId');
       state = state.copyWith(status: AuthStatus.unauthenticated);
     } catch (e) {
       // state = state.copyWith(
@@ -63,14 +63,14 @@ class AuthNotifier extends StateNotifier<AuthState> {
       final response = await loginUser(user);
       print('✅ [Login] تسجيل الدخول ناجح. Token: ${response.token}');
       await saveToken(response.token);
-      print('✅ [Login] تسجيل الدخول ناجح. shopId: ${response.shopId}');
-      await saveShopId(response.shopId);
+      print('✅ [Login] تسجيل الدخول ناجح. shopeId: ${response.shopeId}');
+      await saveshopeId(response.shopeId);
       print('✅ [Login] تسجيل الدخول ناجح. userName: ${response.userName}');
       await saveUserName(response.userName);
       state = state.copyWith(
         status: AuthStatus.authenticated,
         token: response.token,
-        shopId: response.shopId,
+        shopeId: response.shopeId,
         userName: response.userName,
       );
     } catch (e) {
@@ -98,15 +98,15 @@ class AuthNotifier extends StateNotifier<AuthState> {
     try {
       final token = await getToken();
       if (token != null) {
-        final shopId = await getshopId();
-        print("🟢 [Auth Check] shopId = $shopId");
+        final shopeId = await getshopeId();
+        print("🟢 [Auth Check] shopeId = $shopeId");
         final userName = await getUserName();
         print("🟢 [Auth Check] UserName = $userName");
         print('✅ [Auth Check] توكن موجود: $token');
         state = state.copyWith(
           status: AuthStatus.authenticated,
           token: token,
-          shopId: shopId, // ✅ تأكد أن لا تُمسح
+          shopeId: shopeId, // ✅ تأكد أن لا تُمسح
           userName: userName,
         );
       } else {
@@ -132,7 +132,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     state = state.copyWith(
       status: AuthStatus.unauthenticated,
       token: null,
-      shopId: null,
+      shopeId: null,
       userName: null,
     );
   }

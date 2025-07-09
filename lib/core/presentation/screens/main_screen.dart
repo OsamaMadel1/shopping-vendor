@@ -1,6 +1,7 @@
 import 'package:app/core/application/navigator_provider.dart';
 import 'package:app/core/presentation/components/bottom_app_bar_component.dart';
-import 'package:app/settings/presentation/screens/profile_screen.dart';
+import 'package:app/orders/presentation/screens/orders_screen.dart';
+import 'package:app/settings/presentation/screens/settings_screen.dart';
 import 'package:app/mangment_products/presentation/screens/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,10 +23,10 @@ class MainScreen extends ConsumerWidget {
         index: currentScreenIndex,
         children: const [
           ProductScreen(), // currentScreenIndex = 0
-          Text(" OrdersScreen(),"), // currentScreenIndex = 1
+          OrdersScreen(), // currentScreenIndex = 1
           Text('ReportsScreen()'), // currentScreenIndex = 2
           Text('SalesScreen'), // currentScreenIndex = 3
-          ProfileScreen(), // currentScreenIndex = 4
+          SettingsScreen(), // currentScreenIndex = 4
           // CategoriesScreen(),
         ],
       ),

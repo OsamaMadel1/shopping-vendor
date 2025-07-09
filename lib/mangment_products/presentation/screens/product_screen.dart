@@ -203,7 +203,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
     Future.microtask(() {
       ref
           .read(productNotifierProvider.notifier)
-          .fetchProducts(shopId: ref.read(authNotifierProvider).shopId);
+          .fetchProducts(shopeId: ref.read(authNotifierProvider).shopeId);
     });
   }
 
@@ -247,12 +247,11 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
                 );
 
                 //  if (selectedCategory  != null) {
-                final shopId = ref.read(authNotifierProvider).shopId;
+                final shopeId = ref.read(authNotifierProvider).shopeId;
                 final categoryName = selectedCategory.name; // نأخذ الاسم
 
-                ref
-                    .read(productNotifierProvider.notifier)
-                    .fetchProducts(shopId: shopId, categoryName: categoryName);
+                ref.read(productNotifierProvider.notifier).fetchProducts(
+                    shopeId: shopeId, categoryName: categoryName);
                 // }
               }
             },
@@ -386,8 +385,12 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
                             child: ButtonWidget(
                               text: 'details',
                               onTap: () {
-                                context.push('/productDetailsScreen',
-                                    extra: product);
+                                // context.push('/productDetailsScreen',
+                                //     extra: product);
+                                context.pushNamed(
+                                  'productDetailsScreen',
+                                  pathParameters: {'id': product.id!},
+                                );
                               },
                             ),
                           ),
@@ -434,8 +437,8 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
                               child: ButtonWidget(
                                 text: 'details',
                                 onTap: () {
-                                  context.push('/productDetailsScreen',
-                                      extra: product);
+                                  context.pushNamed('productDetailsScreen',
+                                      pathParameters: {'id': product.id!});
                                 },
                               ),
                             ),

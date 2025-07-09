@@ -1,17 +1,21 @@
-// import 'package:app/orders/data/source/order_remote_data_source.dart';
-// import 'package:app/orders/domain/entities/order_entity.dart';
-// import 'package:app/orders/domain/repositories/order_repository.dart';
+import 'package:app/orders/data/source/order_remote_data_source.dart';
+import 'package:app/orders/domain/entities/order_entity.dart';
+import 'package:app/orders/domain/repositories/order_repository.dart';
 
-// class OrderRepositoryImpl implements OrderRepository {
-//   final OrderRemoteDataSource orderRemoteDataSource;
-//   OrderRepositoryImpl(this.orderRemoteDataSource);
-//   @override
-//   Future<List<OrderEntity>> fetchOrders() async {
-//     return await orderRemoteDataSource.fetchOrders();
-//   }
+class OrderRepositoryImpl implements OrderRepository {
+  final OrderRemoteDataSource remoteDataSource;
 
-//   @override
-//   Future<OrderEntity> getOrderById(String id) async {
-//     return await orderRemoteDataSource.getOrderById(id);
-//   }
-// }
+  OrderRepositoryImpl(this.remoteDataSource);
+
+  @override
+  Future<List<OrderEntity>> getOrdersByshopeId(String shopeId) async {
+    final models = await remoteDataSource.getOrdersByshopeId(shopeId);
+    return models.map((model) => model.toEntity()).toList();
+  }
+
+  @override
+  Future<OrderEntity> getOrderById(String orderId) async {
+    final model = await remoteDataSource.getOrderById(orderId);
+    return model.toEntity();
+  }
+}

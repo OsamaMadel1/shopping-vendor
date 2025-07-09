@@ -44,10 +44,10 @@ class ProductRepositoryImpl implements ProductRepository {
 
   @override
   Future<List<ProductEntity>> fetchProducts(
-      {String? shopId, String? categoryName}) async {
+      {String? shopeId, String? categoryName}) async {
     // return await productRemoteDataSource.fetchProducts();
     final models =
-        await productRemoteDataSource.fetchProducts(shopId, categoryName);
+        await productRemoteDataSource.fetchProducts(shopeId, categoryName);
     return models.map((e) => e as ProductEntity).toList();
   }
 

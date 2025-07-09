@@ -1,9 +1,10 @@
-// import 'package:app/orders/application/providers/repository_provider.dart';
-// import 'package:app/orders/domain/usecase/fetch_orders_use_case.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:app/orders/application/providers/repository_provider.dart';
+import 'package:app/orders/domain/usecase/get_orders_by_shop_id_use_case.dart';
 
-// /// UseCases
-// final fetchOrdersUseCaseProvider = Provider<FetchOrdersUseCase>((ref) {
-//   final repo = ref.watch(orderRepositoryProvider);
-//   return FetchOrdersUseCase(repo);
-// });
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+/// UseCases
+final getOrdersUseCaseProvider = Provider<GetOrdersByshopeIdUseCase>((ref) {
+  final repo = ref.watch(orderRepositoryProvider);
+  return GetOrdersByshopeIdUseCase(repo);
+});

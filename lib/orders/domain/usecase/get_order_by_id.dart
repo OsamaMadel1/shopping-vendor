@@ -1,11 +1,12 @@
-// import 'package:app/orders/domain/entities/order_entity.dart';
-// import 'package:app/orders/domain/repositories/order_repository.dart';
+import 'package:app/orders/domain/entities/order_entity.dart';
+import 'package:app/orders/domain/repositories/order_repository.dart';
 
-// class GetOrderById {
-//   final OrderRepository orderRepository;
-//   GetOrderById(this.orderRepository);
+class GetOrderByIdUseCase {
+  final OrderRepository repository;
 
-//   Future<OrderEntity> call(String id) async {
-//     return await orderRepository.getOrderById(id);
-//   }
-// }
+  GetOrderByIdUseCase(this.repository);
+
+  Future<OrderEntity> call(String orderId) {
+    return repository.getOrderById(orderId);
+  }
+}

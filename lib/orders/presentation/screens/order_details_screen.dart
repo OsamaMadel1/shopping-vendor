@@ -1,99 +1,52 @@
-// // import 'package:app/orders/domain/entities/order_entity.dart';
-// // import 'package:flutter/material.dart';
-// // import 'package:intl/intl.dart';
-
-// // class OrderDetailsScreen extends StatelessWidget {
-// //   final OrderEntity order;
-
-// //   const OrderDetailsScreen({super.key, required this.order});
-
-// //   @override
-// //   Widget build(BuildContext context) {
-// //     final formattedDate = DateFormat.yMMMMd().format(order.orderDate);
-
-// //     return Scaffold(
-// //       appBar: AppBar(title: const Text('تفاصيل الطلب')),
-// //       body: Padding(
-// //         padding: const EdgeInsets.all(16.0),
-// //         child: Column(
-// //           crossAxisAlignment: CrossAxisAlignment.start,
-// //           children: [
-// //             _buildDetail(title: 'المنتج', value: order.productName),
-// //             _buildDetail(title: 'اسم العميل', value: order.custumName),
-// //             _buildDetail(title: 'الكمية', value: order.quantity.toString()),
-// //             _buildDetail(title: 'السعر الكلي', value: '${order.totalPrice.toStringAsFixed(2)} \$'),
-// //             _buildDetail(title: 'تاريخ الطلب', value: formattedDate),
-// //             _buildDetail(title: 'الحالة', value: _statusText(order.status)),
-// //           ],
-// //         ),
-// //       ),
-// //     );
-// //   }
-
-// //   Widget _buildDetail({required String title, required String value}) {
-// //     return Padding(
-// //       padding: const EdgeInsets.symmetric(vertical: 8.0),
-// //       child: Row(
-// //         children: [
-// //           Expanded(flex: 2, child: Text('$title:', style: const TextStyle(fontWeight: FontWeight.bold))),
-// //           const SizedBox(width: 8),
-// //           Expanded(flex: 3, child: Text(value)),
-// //         ],
-// //       ),
-// //     );
-// //   }
-
-// //   String _statusText(OrderStatus status) {
-// //     switch (status) {
-// //       case OrderStatus.pending:
-// //         return 'قيد الانتظار';
-// //       case OrderStatus.inProgress:
-// //         return 'قيد التحضير';
-// //       case OrderStatus.inDelivery:
-// //         return 'قيد التوصيل';
-// //       case OrderStatus.completed:
-// //         return 'مكتمل';
-// //       case OrderStatus.cancelled:
-// //         return 'ملغي';
-// //     }
-// //   }
-// // }
-// import 'package:app/orders/domain/entities/order_entity.dart';
-// import 'package:app/orders/application/providers/get_order_by_id_provider.dart';
+// import 'package:app/orders/application/providers/order_by_id_provider.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:intl/intl.dart';
 
 // class OrderDetailsScreen extends ConsumerWidget {
-//   final String orderId;
+//   final String id;
 
-//   const OrderDetailsScreen({super.key, required this.orderId});
+//   const OrderDetailsScreen({super.key, required this.id});
 
 //   @override
 //   Widget build(BuildContext context, WidgetRef ref) {
-//     final orderAsync = ref.watch(getOrderByIdProvider(orderId));
+//     final orderAsync = ref.watch(getOrderByIdProvider(id));
 
 //     return Scaffold(
 //       appBar: AppBar(title: const Text('تفاصيل الطلب')),
 //       body: orderAsync.when(
 //         loading: () => const Center(child: CircularProgressIndicator()),
-//         error: (error, _) => Center(child: Text("حدث خطأ: $error")),
+//         error: (error, _) => Center(child: Text('خطأ: $error')),
 //         data: (order) {
-//           final formattedDate = DateFormat.yMMMMd().format(order.orderDate);
-
 //           return Padding(
-//             padding: const EdgeInsets.all(16.0),
+//             padding: const EdgeInsets.all(16),
 //             child: Column(
 //               crossAxisAlignment: CrossAxisAlignment.start,
 //               children: [
-//                 _buildDetail(title: 'اسم المنتج', value: order.productName),
-//                 _buildDetail(title: 'اسم العميل', value: order.custumName),
-//                 _buildDetail(title: 'الكمية', value: order.quantity.toString()),
-//                 _buildDetail(
-//                     title: 'السعر الكلي',
-//                     value: '${order.totalPrice.toStringAsFixed(2)} \$'),
-//                 _buildDetail(title: 'تاريخ الطلب', value: formattedDate),
-//                 _buildDetail(title: 'الحالة', value: _statusText(order.status)),
+//                 Text('رقم الطلب: ${order.id}', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+//                 const SizedBox(height: 8),
+//                 Text('تاريخ الطلب: ${DateFormat('yyyy-MM-dd HH:mm').format(order.orderDate)}'),
+//                 const SizedBox(height: 8),
+//                 Text('الحالة: ${order.orderState}'),
+//                 const SizedBox(height: 8),
+//                 Text('الإجمالي: ${order.totalAmount}'),
+//                 const SizedBox(height: 16),
+//                 const Divider(),
+//                 const Text('العناصر:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+//                 const SizedBox(height: 8),
+//                 Expanded(
+//                   child: ListView.builder(
+//                     itemCount: order.orderItems.length,
+//                     itemBuilder: (context, index) {
+//                       final item = order.orderItems[index];
+//                       return ListTile(
+//                         title: Text(item.productName),
+//                         subtitle: Text('الكمية: ${item.quantity}'),
+//                         trailing: Text('${item.price}'),
+//                       );
+//                     },
+//                   ),
+//                 ),
 //               ],
 //             ),
 //           );
@@ -101,35 +54,66 @@
 //       ),
 //     );
 //   }
-
-//   Widget _buildDetail({required String title, required String value}) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(vertical: 8.0),
-//       child: Row(
-//         children: [
-//           Expanded(
-//               flex: 2,
-//               child: Text('$title:',
-//                   style: const TextStyle(fontWeight: FontWeight.bold))),
-//           const SizedBox(width: 8),
-//           Expanded(flex: 3, child: Text(value)),
-//         ],
-//       ),
-//     );
-//   }
-
-//   String _statusText(OrderStatus status) {
-//     switch (status) {
-//       case OrderStatus.pending:
-//         return 'قيد الانتظار';
-//       case OrderStatus.inProgress:
-//         return 'قيد التحضير';
-//       case OrderStatus.inDelivery:
-//         return 'قيد التوصيل';
-//       case OrderStatus.completed:
-//         return 'مكتمل';
-//       case OrderStatus.cancelled:
-//         return 'ملغي';
-//     }
-//   }
 // }
+
+import 'package:app/orders/application/providers/get_order_by_id_provider.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
+
+class OrderDetailsScreen extends ConsumerWidget {
+  final String id;
+
+  const OrderDetailsScreen({super.key, required this.id});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final orderAsync = ref.watch(getOrderByIdProvider(id));
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('تفاصيل الطلب')),
+      body: orderAsync.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, _) => Center(child: Text('خطأ: $error')),
+        data: (order) {
+          return SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('رقم الطلب: ${order.id.substring(0, 8)}',
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 8),
+                Text(
+                    'تاريخ الطلب: ${DateFormat('yyyy-MM-dd HH:mm').format(order.orderDate)}'),
+                const SizedBox(height: 8),
+                Text('الحالة: ${order.orderState}'),
+                const SizedBox(height: 8),
+                Text('الإجمالي: ${order.totalAmount}'),
+                const SizedBox(height: 16),
+                const Divider(),
+                const Text('العناصر:',
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 8),
+
+                /// ✅ العناصر
+                ...order.orderItems.map(
+                  (item) => Card(
+                    margin: const EdgeInsets.symmetric(vertical: 6),
+                    child: ListTile(
+                      title: Text(item.productName),
+                      subtitle: Text('الكمية: ${item.quantity}'),
+                      trailing: Text('${item.price}'),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+}

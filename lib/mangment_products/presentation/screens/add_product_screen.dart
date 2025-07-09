@@ -19,9 +19,9 @@
 //   @override
 //   Widget build(BuildContext context, WidgetRef ref) {
 //     final authState = ref.watch(authNotifierProvider);
-//     final shopId = authState.shopId;
+//     final shopeId = authState.shopeId;
 
-//     print("shopId in AddProductScreen: ${shopId}");
+//     print("shopeId in AddProductScreen: ${shopeId}");
 //     final form = ref.watch(addProductFormProvider);
 
 //     ref.listen<ProductState>(productNotifierProvider, (previous, next) {
@@ -155,7 +155,7 @@
 //                             final currency =
 //                                 form.control('currency').value as String;
 
-//                             final shopeId = shopId;
+//                             final shopeId = shopeId;
 //                             if (shopeId == null) {
 //                               ScaffoldMessenger.of(context).showSnackBar(
 //                                 const SnackBar(
@@ -215,7 +215,7 @@
 //   @override
 //   Widget build(BuildContext context, WidgetRef ref) {
 //     final authState = ref.watch(authNotifierProvider);
-//     final shopId = authState.shopId;
+//     final shopeId = authState.shopeId;
 //     final form = ref.watch(addProductFormProvider);
 //     final theme = Theme.of(context);
 //     final isDarkMode = theme.brightness == Brightness.dark;
@@ -448,7 +448,7 @@
 //                                         .control('currency')
 //                                         .value as String;
 
-//                                     if (shopId == null) {
+//                                     if (shopeId == null) {
 //                                       ScaffoldMessenger.of(context)
 //                                           .showSnackBar(
 //                                         const SnackBar(
@@ -467,7 +467,7 @@
 //                                       image: image,
 //                                       categoryId: categoryId,
 //                                       currency: currency,
-//                                       shopeId: shopId,
+//                                       shopeId: shopeId,
 //                                     );
 
 //                                     await ref
@@ -518,9 +518,10 @@
 //     );
 //   }
 // }
-import 'dart:io';
+
 import 'package:app/authentication/application/providers/auth_notifier_provider.dart';
-import 'package:app/category/presentation/widgets/category_dropdown_with_add.dart';
+import 'package:app/category/presentation/widgets/add_category.dart';
+import 'package:app/category/presentation/widgets/category_dropdown.dart';
 import 'package:app/core/presentation/widgets/reactive_text_input_widget.dart';
 import 'package:app/mangment_products/application/product_state.dart';
 import 'package:app/mangment_products/application/providers/add_product_form_provider.dart';
@@ -537,7 +538,7 @@ class AddProductScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authNotifierProvider);
-    final shopId = authState.shopId;
+    final shopeId = authState.shopeId;
     final form = ref.watch(addProductFormProvider);
     final theme = Theme.of(context);
     final isDarkMode = theme.brightness == Brightness.dark;
@@ -610,9 +611,19 @@ class AddProductScreen extends ConsumerWidget {
                       // الفئة
                       _buildLabel("الفئة"),
                       const Gap(8),
-                      CategoryDropdownWithAdd(
-                        formControlName: "categoryId",
+                      Row(
+                        children: const [
+                          Expanded(
+                            child: CategoryDropdown(
+                              formControlName: "categoryId",
+                              labelText: "اختر الفئة",
+                            ),
+                          ),
+                          SizedBox(width: 8),
+                          AddCategory(),
+                        ],
                       ),
+
                       const Gap(16),
 
                       // الوصف
@@ -737,9 +748,9 @@ class AddProductScreen extends ConsumerWidget {
                   final image = form.control('image').value as String;
                   final categoryId = form.control('categoryId').value as String;
                   final currency = form.control('currency').value as String;
-                  final shopId = ref.read(authNotifierProvider).shopId;
+                  final shopeId = ref.read(authNotifierProvider).shopeId;
 
-                  if (shopId == null) {
+                  if (shopeId == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text('خطأ: لم يتم العثور على المتجر'),
@@ -756,7 +767,7 @@ class AddProductScreen extends ConsumerWidget {
                     image: image,
                     categoryId: categoryId,
                     currency: currency,
-                    shopeId: shopId,
+                    shopeId: shopeId,
                   );
 
                   await ref.read(productNotifierProvider.notifier).addProduct(

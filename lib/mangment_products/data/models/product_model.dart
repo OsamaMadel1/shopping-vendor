@@ -26,7 +26,7 @@ class ProductModel extends ProductEntity {
       categoryId: json['categoryId'],
       currency: json['currency'],
       shopeId: json['shopeId'],
-      categoryName: json['category'] != null ? json['category']['name'] : null,
+      categoryName: json['category']?['name'],
     );
   }
 

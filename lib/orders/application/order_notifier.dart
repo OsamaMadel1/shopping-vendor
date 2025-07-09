@@ -1,25 +1,27 @@
-// import 'package:app/orders/application/order_state.dart';
-// import 'package:app/orders/domain/usecase/fetch_orders_use_case.dart';
-// import 'package:app/utils/error_handler.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:app/orders/application/order_state.dart';
+import 'package:app/orders/domain/usecase/get_orders_by_shop_id_use_case.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// class OrderNotifier extends StateNotifier<OrderState> {
-//   final FetchOrdersUseCase fetchOrdersUseCase;
-//   // final GetProductByIdUseCase getProductByIdUseCase;
+class OrderNotifier extends StateNotifier<OrderState> {
+  final GetOrdersByshopeIdUseCase getOrdersByshopeIdUseCase;
 
-//   OrderNotifier(
-//     this.fetchOrdersUseCase,
-//     // this.getProductByIdUseCase,
-//   ) : super(OrderInitial());
+  OrderNotifier(this.getOrdersByshopeIdUseCase) : super(const OrderState());
 
-//   Future<void> fetchOrders() async {
-//     state = OrderLoading();
-//     try {
-//       final orders = await fetchOrdersUseCase();
-//       state = OrderLoaded(orders);
-//     } catch (e) {
-//       final message = ErrorHandler.getMessage(e);
-//       state = OrderError(message);
-//     }
-//   }
-// }
+  Future<void> loadOrders(String shopeId) async {
+    try {
+      state = state.copyWith(isLoading: true, error: null);
+
+      final orders = await getOrdersByshopeIdUseCase(shopeId);
+
+      state = state.copyWith(
+        isLoading: false,
+        orders: orders,
+      );
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        error: e.toString(),
+      );
+    }
+  }
+}

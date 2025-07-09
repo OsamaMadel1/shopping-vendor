@@ -9,9 +9,9 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
 
   @override
   Future<List<ProductModel>> fetchProducts(
-      String? shopId, String? categoryName) async {
+      String? shopeId, String? categoryName) async {
     final queryParams = <String, dynamic>{};
-    if (shopId != null) queryParams['shopId'] = shopId;
+    if (shopeId != null) queryParams['shopeId'] = shopeId;
     if (categoryName != null && categoryName.isNotEmpty)
       queryParams['category'] = categoryName;
     final response = await dio.get('Product', queryParameters: queryParams);

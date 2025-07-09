@@ -1,6 +1,6 @@
-// import 'package:app/orders/domain/entities/order_entity.dart';
+import 'package:app/orders/domain/entities/order_entity.dart';
 
-// abstract class OrderRepository {
-//   Future<List<OrderEntity>> fetchOrders();
-//   Future<OrderEntity> getOrderById(String id);
-// }
+abstract class OrderRepository {
+  Future<List<OrderEntity>> getOrdersByshopeId(String shopeId);
+  Future<OrderEntity> getOrderById(String orderId);
+}

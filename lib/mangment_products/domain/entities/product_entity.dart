@@ -9,6 +9,7 @@ class ProductEntity {
   final String currency;
   final String shopeId;
   final String description;
+  final String? categoryName; // new
 
   ProductEntity({
     this.id,
@@ -19,5 +20,6 @@ class ProductEntity {
     required this.currency,
     required this.shopeId,
     required this.description,
+    this.categoryName,
   });
 }

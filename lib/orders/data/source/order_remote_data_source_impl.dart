@@ -1,29 +1,53 @@
-// import 'package:app/orders/data/models/order_model.dart';
-// import 'package:app/orders/data/source/order_remote_data_source.dart';
-// import 'package:dio/dio.dart';
+import 'package:app/orders/data/models/order_model.dart';
+import 'package:dio/dio.dart';
 
-// class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
-//   final Dio dio;
-//   OrderRemoteDataSourceImpl(this.dio);
-//   @override
-//   Future<List<OrderModel>> fetchOrders() async {
-//     final response = await dio.get('orders');
-//     if (response.statusCode == 200) {
-//       final data = response.data as List;
-//       return data.map((e) => OrderModel.fromJson(e)).toList();
-//     } else {
-//       throw Exception(response.data['errors'].toString());
-//     }
-//   }
+import 'order_remote_data_source.dart';
 
-//   @override
-//   Future<OrderModel> getOrderById(String id) async {
-//     final response = await dio.get('orders/$id');
-//     if (response.statusCode == 200) {
-//       final data = response.data;
-//       return OrderModel.fromJson(data);
-//     } else {
-//       throw Exception(response.data['errors'].toString());
-//     }
-//   }
-// }
+class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
+  final Dio dio;
+
+  OrderRemoteDataSourceImpl(this.dio);
+
+  @override
+  Future<List<OrderModel>> getOrdersByshopeId(String shopeId) async {
+    final response = await dio.get(
+      'Order',
+      queryParameters: {'shopeId': shopeId},
+    );
+
+    if (response.statusCode == 200 && response.data['succeeded'] == true) {
+      final data = response.data['data'] as List;
+      return data.map((e) => OrderModel.fromJson(e)).toList();
+    } else {
+      throw Exception('فشل في جلب الطلبات');
+    }
+  }
+  //   @override
+  // Future<List<OrderModel>> getOrdersByshopeId(String shopeId) async {
+  //   final response = await dio.get(
+  //     'Order',
+  //     queryParameters: {'shopeId': shopeId},
+  //   );
+
+  //   if (response.statusCode == 200 && response.data['succeeded'] == true) {
+  //     final rawData = response.data['data'];
+  //     if (rawData is List) {
+  //       return rawData.map((e) => OrderModel.fromJson(e)).toList();
+  //     } else {
+  //       return []; // لا يوجد بيانات
+  //     }
+  //   } else {
+  //     throw Exception('فشل في جلب الطلبات');
+  //   }
+  // }
+  @override
+  Future<OrderModel> getOrderById(String orderId) async {
+    final response = await dio.get('Order/$orderId');
+
+    if (response.statusCode == 200 && response.data['succeeded'] == true) {
+      return OrderModel.fromJson(response.data['data']);
+    } else {
+      throw Exception('فشل في جلب تفاصيل الطلب');
+    }
+  }
+}

@@ -15,8 +15,8 @@ abstract class AuthRepository {
   // استرجاع التوكن
   Future<String?> getToken();
 
-  Future<void> saveShopId(String shopId);
-  Future<String?> getShopId();
+  Future<void> saveshopeId(String shopeId);
+  Future<String?> getshopeId();
 
   Future<void> saveUserName(String userName);
   Future<String?> getUserName();
