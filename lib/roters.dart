@@ -52,6 +52,10 @@ final router = Provider<GoRouter>((ref) {
       //   name: "welcomeScreen",
       //   builder: (context, state) => WelcomeScreen(),
       // ),
+
+      // =================================
+      // ======== account ================
+      // =================================
       GoRoute(
         path: "/signUp",
         name: "signUpScreen",
@@ -62,11 +66,16 @@ final router = Provider<GoRouter>((ref) {
         name: "loginScreen",
         builder: (context, state) => LoginScreen(),
       ),
+      //-----------------------------------------
+
       GoRoute(
         path: "/mainScreen",
         name: "mainScreen",
         builder: (context, state) => MainScreen(),
       ),
+      // =================================
+      // ======== product ================
+      // =================================
       GoRoute(
         path: "/addProductScreen",
         name: "addProductScreen",
@@ -89,7 +98,11 @@ final router = Provider<GoRouter>((ref) {
           return EditProductScreen(product: product);
         },
       ),
+      // ------------------------------------
 
+      // =================================
+      // ======== order ==================
+      // =================================
       GoRoute(
         path: '/order/:id',
         name: 'orderDetailsScreen',
@@ -98,12 +111,17 @@ final router = Provider<GoRouter>((ref) {
           return OrderDetailsScreen(id: id);
         },
       ),
+      //-----------------------------------
 
+      // =================================
+      // ======== category================
+      // =================================
       // GoRoute(
       //   path: "/categoryScreen",
       //   name: "categoryScreen",
       //   builder: (context, state) => CategoriesScreen(),
       // ),
+      //-----------------------------------
     ],
   );
 });
