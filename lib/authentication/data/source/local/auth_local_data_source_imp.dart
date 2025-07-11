@@ -7,7 +7,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   AuthLocalDataSourceImpl(this.prefs);
 
   static const _tokenKey = 'auth_token';
-  static const _shopeIdKey = 'shop_id';
+  static const _shopIdKey = 'shop_id';
   static const _userNameKey = 'user_name';
 
   @override
@@ -21,13 +21,13 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   }
 
   @override
-  Future<void> saveshopeId(String shopeId) async {
-    await prefs.setString(_shopeIdKey, shopeId);
+  Future<void> saveshopId(String shopId) async {
+    await prefs.setString(_shopIdKey, shopId);
   }
 
   @override
-  Future<String?> getshopeId() async {
-    return prefs.getString(_shopeIdKey);
+  Future<String?> getshopId() async {
+    return prefs.getString(_shopIdKey);
   }
 
   @override
@@ -43,7 +43,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 
   Future<void> clearAll() async {
     await prefs.remove(_tokenKey);
-    await prefs.remove(_shopeIdKey);
+    await prefs.remove(_shopIdKey);
     await prefs.remove(_userNameKey);
   }
 

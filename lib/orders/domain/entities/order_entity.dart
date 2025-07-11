@@ -19,7 +19,7 @@ class OrderItemEntity {
 class OrderEntity {
   final String id;
   final String customerId;
-  final String shopeId;
+  final String shopId;
   final DateTime orderDate;
   final double totalAmount;
   final String orderState;
@@ -28,7 +28,7 @@ class OrderEntity {
   OrderEntity({
     required this.id,
     required this.customerId,
-    required this.shopeId,
+    required this.shopId,
     required this.orderDate,
     required this.totalAmount,
     required this.orderState,

@@ -12,7 +12,7 @@ class ProductModel extends ProductEntity {
     required super.image,
     required super.categoryId,
     required super.currency,
-    required super.shopeId,
+    required super.shopId,
     this.categoryName,
   });
 
@@ -25,11 +25,13 @@ class ProductModel extends ProductEntity {
       image: json['image'],
       categoryId: json['categoryId'],
       currency: json['currency'],
-      shopeId: json['shopeId'],
+      shopId: json['shopId'],
       categoryName: json['category']?['name'],
     );
   }
 
+// لن نحتاجه لإرسال المنتج مع الصورة، لأننا الآن نرسل بيانات فورم داتا وليس جيسون.
+// لذا يمكننا تركه كما هو أو حتى تجاهله للإرسال فقط.
   Map<String, dynamic> toJson() {
     return {
       'name': name,
@@ -37,7 +39,7 @@ class ProductModel extends ProductEntity {
       'image': image,
       'categoryId': categoryId,
       'currency': currency,
-      'shopeId': shopeId,
+      'shopId': shopId,
       'description': description,
     };
   }

@@ -1,12 +1,12 @@
 import 'package:app/orders/domain/entities/order_entity.dart';
 import 'package:app/orders/domain/repositories/order_repository.dart';
 
-class GetOrdersByshopeIdUseCase {
+class GetOrdersByshopIdUseCase {
   final OrderRepository repository;
 
-  GetOrdersByshopeIdUseCase(this.repository);
+  GetOrdersByshopIdUseCase(this.repository);
 
-  Future<List<OrderEntity>> call(String shopeId) {
-    return repository.getOrdersByshopeId(shopeId);
+  Future<List<OrderEntity>> call(String shopId) {
+    return repository.getOrdersByshopId(shopId);
   }
 }

@@ -9,7 +9,7 @@ final dioProvider = Provider<Dio>((ref) {
   final dio = Dio(
     BaseOptions(
       baseUrl: 'http://multi-vendor-api.runasp.net/multi-vendor-api/',
-      headers: {'Content-Type': 'application/json'},
+      //headers: {'Content-Type': 'application/json'},from application/json or  'Content-Type': 'multipart/form-data'
     ),
   );
   dio.interceptors

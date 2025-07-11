@@ -22,8 +22,8 @@ final authNotifierProvider =
       saveToken: SaveTokenUseCase(repository),
       getToken: GetTokenUseCase(repository),
       clearToken: ClearTokenUseCase(repository),
-      saveshopeId: SaveshopeIdUseCase(repository),
-      getshopeId: GetshopeIdUseCase(repository),
+      saveshopId: SaveshopIdUseCase(repository),
+      getshopId: GetshopIdUseCase(repository),
       saveUserName: SaveUserNameUseCase(repository),
       getUserName: GetUserNameUseCase(repository));
 });

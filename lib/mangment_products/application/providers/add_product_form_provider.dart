@@ -19,9 +19,9 @@ final addProductFormProvider = Provider<FormGroup>((ref) {
     'descriptionProduct': FormControl<String>(
       validators: [Validators.required, Validators.minLength(5)],
     ),
-    // سنضيف حقل الصورة لاحقًا إذا أردت
-    // 'imageUrl': FormControl<XFile?>(), // <-- حقل الصورة الجديد
-    'image': FormControl<String>(),
+
+    'image': FormControl<XFile?>(),
+    // 'image': FormControl<String>(),
     'categoryId': FormControl<String>(validators: [Validators.required]),
     'currency': FormControl<String>(validators: [Validators.required]),
   });

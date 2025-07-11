@@ -45,13 +45,13 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<void> saveshopeId(String shopeId) {
-    return localDataSource.saveshopeId(shopeId);
+  Future<void> saveshopId(String shopId) {
+    return localDataSource.saveshopId(shopId);
   }
 
   @override
-  Future<String?> getshopeId() {
-    return localDataSource.getshopeId();
+  Future<String?> getshopId() {
+    return localDataSource.getshopId();
   }
 
   @override

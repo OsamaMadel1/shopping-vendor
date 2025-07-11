@@ -9,10 +9,10 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
   OrderRemoteDataSourceImpl(this.dio);
 
   @override
-  Future<List<OrderModel>> getOrdersByshopeId(String shopeId) async {
+  Future<List<OrderModel>> getOrdersByshopId(String shopId) async {
     final response = await dio.get(
       'Order',
-      queryParameters: {'shopeId': shopeId},
+      queryParameters: {'shopId': shopId},
     );
 
     if (response.statusCode == 200 && response.data['succeeded'] == true) {
@@ -23,10 +23,10 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
     }
   }
   //   @override
-  // Future<List<OrderModel>> getOrdersByshopeId(String shopeId) async {
+  // Future<List<OrderModel>> getOrdersByshopId(String shopId) async {
   //   final response = await dio.get(
   //     'Order',
-  //     queryParameters: {'shopeId': shopeId},
+  //     queryParameters: {'shopId': shopId},
   //   );
 
   //   if (response.statusCode == 200 && response.data['succeeded'] == true) {

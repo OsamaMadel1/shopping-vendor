@@ -17,7 +17,7 @@ class ProductRepositoryImpl implements ProductRepository {
       image: product.image,
       categoryId: product.categoryId,
       currency: product.currency,
-      shopeId: product.shopeId,
+      shopId: product.shopId,
     );
     await productRemoteDataSource.addProduct(productModel);
   }
@@ -32,7 +32,7 @@ class ProductRepositoryImpl implements ProductRepository {
       image: product.image,
       categoryId: product.categoryId,
       currency: product.currency,
-      shopeId: product.shopeId,
+      shopId: product.shopId,
     );
     await productRemoteDataSource.updateProduct(productModel);
   }
@@ -44,10 +44,10 @@ class ProductRepositoryImpl implements ProductRepository {
 
   @override
   Future<List<ProductEntity>> fetchProducts(
-      {String? shopeId, String? categoryName}) async {
+      {String? shopId, String? categoryName}) async {
     // return await productRemoteDataSource.fetchProducts();
     final models =
-        await productRemoteDataSource.fetchProducts(shopeId, categoryName);
+        await productRemoteDataSource.fetchProducts(shopId, categoryName);
     return models.map((e) => e as ProductEntity).toList();
   }
 

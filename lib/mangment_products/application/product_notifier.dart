@@ -22,11 +22,11 @@ class ProductNotifier extends StateNotifier<ProductState> {
     this.deleteProductUseCase,
   ) : super(ProductInitial());
   //جلب كل المنتجات
-  Future<void> fetchProducts({String? shopeId, String? categoryName}) async {
+  Future<void> fetchProducts({String? shopId, String? categoryName}) async {
     state = ProductLoading();
     try {
       final products = await fetchProductsUsecase(
-        shopeId: shopeId,
+        shopId: shopId,
         categoryName: categoryName,
       );
       state = ProductLoaded(products);
@@ -57,8 +57,8 @@ class ProductNotifier extends StateNotifier<ProductState> {
       await addProductUseCase(product);
       // ✅ إعادة تحميل المنتجات بعد الإضافة
       // await _refreshProductsAfterMutation(
-      //     shopeId: product.shopeId, categoryName: product.categoryId);
-      await fetchProducts(shopeId: product.shopeId, categoryName: categoryName);
+      //     shopId: product.shopId, categoryName: product.categoryId);
+      await fetchProducts(shopId: product.shopId, categoryName: categoryName);
     } catch (e) {
       final errorMassage = ErrorHandler.getMessage(e);
       state = ProductError(errorMassage);
@@ -86,10 +86,10 @@ class ProductNotifier extends StateNotifier<ProductState> {
       await updateProductUseCase(product);
       // ✅ إعادة تحميل المنتجات بعد الإضافة
       // await _refreshProductsAfterMutation(
-      //     shopeId: product.shopeId, categoryName: product.categoryId);
+      //     shopId: product.shopId, categoryName: product.categoryId);
       // await fetchProducts();
       await fetchProducts(
-          shopeId: product.shopeId, categoryName: product.categoryId);
+          shopId: product.shopId, categoryName: product.categoryId);
     } catch (e) {
       final errorMassage = ErrorHandler.getMessage(e);
       state = ProductError(errorMassage);
@@ -100,7 +100,7 @@ class ProductNotifier extends StateNotifier<ProductState> {
   Future<void> deleteProduct(
     String id,
     //    {
-    //   required String shopeId,
+    //   required String shopId,
     //   String? categoryName,
     // }
   ) async {
@@ -108,7 +108,7 @@ class ProductNotifier extends StateNotifier<ProductState> {
       await deleteProductUseCase(id);
       //TODO :عدم جلب المنتحات من المتاجر التالية بعد الحذف
       // await _refreshProductsAfterMutation(
-      //     shopeId: shopeId, categoryName: categoryName);
+      //     shopId: shopId, categoryName: categoryName);
       await fetchProducts();
     } catch (e) {
       final errorMassage = ErrorHandler.getMessage(e);
@@ -118,9 +118,9 @@ class ProductNotifier extends StateNotifier<ProductState> {
   }
 
   // Future<void> _refreshProductsAfterMutation(
-  //     {String? shopeId, String? categoryName}) async {
+  //     {String? shopId, String? categoryName}) async {
   //   try {
-  //     await fetchProducts(shopeId: shopeId, categoryName: categoryName);
+  //     await fetchProducts(shopId: shopId, categoryName: categoryName);
   //   } catch (e) {
   //     state = ProductError(ErrorHandler.getMessage(e));
   //   }

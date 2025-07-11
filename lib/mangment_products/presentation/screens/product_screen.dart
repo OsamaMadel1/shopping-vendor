@@ -203,7 +203,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
     Future.microtask(() {
       ref
           .read(productNotifierProvider.notifier)
-          .fetchProducts(shopeId: ref.read(authNotifierProvider).shopeId);
+          .fetchProducts(shopId: ref.read(authNotifierProvider).shopId);
     });
   }
 
@@ -247,11 +247,12 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
                 );
 
                 //  if (selectedCategory  != null) {
-                final shopeId = ref.read(authNotifierProvider).shopeId;
+                final shopId = ref.read(authNotifierProvider).shopId;
                 final categoryName = selectedCategory.name; // نأخذ الاسم
 
-                ref.read(productNotifierProvider.notifier).fetchProducts(
-                    shopeId: shopeId, categoryName: categoryName);
+                ref
+                    .read(productNotifierProvider.notifier)
+                    .fetchProducts(shopId: shopId, categoryName: categoryName);
                 // }
               }
             },

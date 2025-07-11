@@ -2,7 +2,7 @@ import 'package:app/mangment_products/domain/entities/product_entity.dart';
 
 abstract class ProductRepository {
   Future<List<ProductEntity>> fetchProducts(
-      {String? shopeId, String? categoryName});
+      {String? shopId, String? categoryName});
   // Future<List<ProductEntity>> fetchProductsByCategory(String categoryId);
 
   Future<ProductEntity> getProductById(String id);

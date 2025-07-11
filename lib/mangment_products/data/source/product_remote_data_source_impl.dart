@@ -9,9 +9,9 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
 
   @override
   Future<List<ProductModel>> fetchProducts(
-      String? shopeId, String? categoryName) async {
+      String? shopId, String? categoryName) async {
     final queryParams = <String, dynamic>{};
-    if (shopeId != null) queryParams['shopeId'] = shopeId;
+    if (shopId != null) queryParams['shopId'] = shopId;
     if (categoryName != null && categoryName.isNotEmpty)
       queryParams['category'] = categoryName;
     final response = await dio.get('Product', queryParameters: queryParams);
@@ -55,7 +55,29 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
 
   @override
   Future<void> addProduct(ProductModel product) async {
-    await dio.post('Product', data: product.toJson());
+    final formData = FormData.fromMap({
+      'name': product.name,
+      'description': product.description,
+      'price': product.price,
+      'categoryId': product.categoryId,
+      'currency': product.currency,
+      'shopId': product.shopId,
+      // إضافة الصورة هنا
+      'image': await MultipartFile.fromFile(
+        product.image,
+        filename: product.image.split('/').last,
+      ),
+    });
+
+    await dio.post(
+      'Product',
+      data: formData,
+      // options: Options(
+      //   headers: {
+      //     'Content-Type': 'multipart/form-data',
+      //   },
+      // ),
+    );
   }
 
   @override

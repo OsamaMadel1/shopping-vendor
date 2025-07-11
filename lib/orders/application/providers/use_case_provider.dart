@@ -4,7 +4,7 @@ import 'package:app/orders/domain/usecase/get_orders_by_shop_id_use_case.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// UseCases
-final getOrdersUseCaseProvider = Provider<GetOrdersByshopeIdUseCase>((ref) {
+final getOrdersUseCaseProvider = Provider<GetOrdersByshopIdUseCase>((ref) {
   final repo = ref.watch(orderRepositoryProvider);
-  return GetOrdersByshopeIdUseCase(repo);
+  return GetOrdersByshopIdUseCase(repo);
 });

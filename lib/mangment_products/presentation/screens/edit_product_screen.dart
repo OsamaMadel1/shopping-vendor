@@ -1,13 +1,17 @@
 // مزود نموذج التعديل مهيأ بقيم المنتج
+import 'dart:io';
+
 import 'package:app/authentication/application/providers/auth_notifier_provider.dart';
 import 'package:app/category/presentation/widgets/category_dropdown.dart';
 import 'package:app/core/presentation/widgets/reactive_text_input_widget.dart';
 import 'package:app/mangment_products/application/product_state.dart';
 import 'package:app/mangment_products/application/providers/product_notifier_provider.dart';
 import 'package:app/mangment_products/domain/entities/product_entity.dart';
+import 'package:app/permissions/permission_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 final editProductFormProvider =
@@ -19,7 +23,7 @@ final editProductFormProvider =
       Validators.required,
     ]),
     'descriptionProduct': FormControl<String>(value: product.description),
-    'image': FormControl<String>(value: product.image),
+    'image': FormControl<XFile?>(),
     'categoryId': FormControl<String>(
         value: product.categoryId, validators: [Validators.required]),
     'currency': FormControl<String>(
@@ -112,14 +116,61 @@ class EditProductScreen extends ConsumerWidget {
                     controllerName: 'descriptionProduct',
                     prefixIcon: Icons.description_outlined,
                   ),
-                  const Gap(16),
-                  _buildLabel("رابط صورة المنتج"),
                   const Gap(8),
-                  ReactiveTextInputWidget(
-                    // hint: 'أدخل رابط الصورة',
-                    hint: '',
-                    controllerName: "image",
-                    prefixIcon: Icons.link,
+                  ReactiveFormConsumer(
+                    builder: (context, form, _) {
+                      final imageControl =
+                          form.control('image') as FormControl<XFile?>;
+                      final pickedImage = imageControl.value;
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ElevatedButton.icon(
+                            icon: const Icon(Icons.image),
+                            label: Text(pickedImage == null
+                                ? 'اختيار صورة'
+                                : 'تغيير الصورة'),
+                            onPressed: () async {
+                              final granted = await PermissionsRequester
+                                  .requestCameraAndStoragePermissions();
+                              if (!granted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content:
+                                          Text('يرجى منح صلاحيات التخزين')),
+                                );
+                                return;
+                              }
+
+                              final picker = ImagePicker();
+                              final picked = await picker.pickImage(
+                                  source: ImageSource.gallery);
+                              if (picked != null) {
+                                imageControl.value = picked;
+                              }
+                            },
+                          ),
+                          const Gap(10),
+                          if (pickedImage != null)
+                            Image.file(
+                              File(pickedImage.path),
+                              height: 100,
+                              width: 100,
+                              fit: BoxFit.cover,
+                            )
+                          else
+                            Image.network(
+                              product.image,
+                              height: 100,
+                              width: 100,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  const Text('لم يتم تحميل الصورة'),
+                            ),
+                        ],
+                      );
+                    },
                   ),
                   const Gap(24),
                   ReactiveFormConsumer(
@@ -138,17 +189,20 @@ class EditProductScreen extends ConsumerWidget {
                                         .control('descriptionProduct')
                                         .value as String? ??
                                     '';
-                                final image =
-                                    form.control('image').value as String? ??
-                                        '';
+                                final pickedImage =
+                                    form.control('image').value as XFile?;
+                                final image = pickedImage?.path ??
+                                    product
+                                        .image; // إذا لم يختر صورة، استخدم القديمة
+
                                 final categoryId =
                                     form.control('categoryId').value as String;
                                 final currency =
                                     form.control('currency').value as String;
-                                final shopeId =
-                                    ref.read(authNotifierProvider).shopeId;
+                                final shopId =
+                                    ref.read(authNotifierProvider).shopId;
 
-                                if (shopeId == null) {
+                                if (shopId == null) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                       content:
@@ -167,7 +221,7 @@ class EditProductScreen extends ConsumerWidget {
                                   image: image,
                                   categoryId: categoryId,
                                   currency: currency,
-                                  shopeId: shopeId,
+                                  shopId: shopId,
                                 );
 
                                 await ref

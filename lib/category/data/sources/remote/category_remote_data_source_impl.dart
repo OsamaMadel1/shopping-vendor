@@ -25,6 +25,9 @@ class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource {
     final response = await dio.post(
       'Category',
       data: {'name': name},
+      options: Options(
+        headers: {'Content-Type': 'application/json'},
+      ),
     );
 
     if (response.statusCode == 200 && response.data['succeeded'] == true) {

@@ -3,15 +3,15 @@ import 'package:app/orders/domain/usecase/get_orders_by_shop_id_use_case.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class OrderNotifier extends StateNotifier<OrderState> {
-  final GetOrdersByshopeIdUseCase getOrdersByshopeIdUseCase;
+  final GetOrdersByshopIdUseCase getOrdersByshopIdUseCase;
 
-  OrderNotifier(this.getOrdersByshopeIdUseCase) : super(const OrderState());
+  OrderNotifier(this.getOrdersByshopIdUseCase) : super(const OrderState());
 
-  Future<void> loadOrders(String shopeId) async {
+  Future<void> loadOrders(String shopId) async {
     try {
       state = state.copyWith(isLoading: true, error: null);
 
-      final orders = await getOrdersByshopeIdUseCase(shopeId);
+      final orders = await getOrdersByshopIdUseCase(shopId);
 
       state = state.copyWith(
         isLoading: false,

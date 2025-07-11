@@ -7,7 +7,7 @@ class ProductEntity {
   final String image;
   final String categoryId;
   final String currency;
-  final String shopeId;
+  final String shopId;
   final String description;
   final String? categoryName; // new
 
@@ -18,7 +18,7 @@ class ProductEntity {
     required this.image,
     required this.categoryId,
     required this.currency,
-    required this.shopeId,
+    required this.shopId,
     required this.description,
     this.categoryName,
   });

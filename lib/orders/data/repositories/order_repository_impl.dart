@@ -8,8 +8,8 @@ class OrderRepositoryImpl implements OrderRepository {
   OrderRepositoryImpl(this.remoteDataSource);
 
   @override
-  Future<List<OrderEntity>> getOrdersByshopeId(String shopeId) async {
-    final models = await remoteDataSource.getOrdersByshopeId(shopeId);
+  Future<List<OrderEntity>> getOrdersByshopId(String shopId) async {
+    final models = await remoteDataSource.getOrdersByshopId(shopId);
     return models.map((model) => model.toEntity()).toList();
   }
 

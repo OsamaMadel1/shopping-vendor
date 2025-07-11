@@ -18,9 +18,9 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> {
 
     Future.microtask(() {
       final shop = ref.read(authNotifierProvider); // ✅ الصواب
-      final shopeId = shop.shopeId;
-      if (shopeId != null) {
-        ref.read(orderNotifierProvider.notifier).loadOrders(shopeId);
+      final shopId = shop.shopId;
+      if (shopId != null) {
+        ref.read(orderNotifierProvider.notifier).loadOrders(shopId);
       }
     });
   }

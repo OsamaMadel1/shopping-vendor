@@ -13,6 +13,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<String> register(UserRegisterModel user) async {
     final response = await dio.post(
       'Account/user/register',
+      options: Options(
+        headers: {'Content-Type': 'application/json'},
+      ),
       data: user.toJson(),
     );
 

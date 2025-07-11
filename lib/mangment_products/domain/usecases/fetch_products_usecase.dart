@@ -7,8 +7,8 @@ class FetchProductsUseCase {
   FetchProductsUseCase(this.productRepository);
 
   Future<List<ProductEntity>> call(
-      {String? shopeId, String? categoryName}) async {
+      {String? shopId, String? categoryName}) async {
     return await productRepository.fetchProducts(
-        shopeId: shopeId, categoryName: categoryName);
+        shopId: shopId, categoryName: categoryName);
   }
 }

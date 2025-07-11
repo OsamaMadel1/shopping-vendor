@@ -8,7 +8,7 @@ part 'order_model.g.dart';
 class OrderModel {
   final String id;
   final String customerId;
-  final String shopeId;
+  final String shopId;
   final DateTime orderDate;
   final double totalAmount;
   final String orderState;
@@ -17,7 +17,7 @@ class OrderModel {
   OrderModel({
     required this.id,
     required this.customerId,
-    required this.shopeId,
+    required this.shopId,
     required this.orderDate,
     required this.totalAmount,
     required this.orderState,
@@ -33,7 +33,7 @@ class OrderModel {
     return OrderEntity(
       id: id,
       customerId: customerId,
-      shopeId: shopeId,
+      shopId: shopId,
       orderDate: orderDate,
       totalAmount: totalAmount,
       orderState: orderState,
