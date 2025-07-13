@@ -108,9 +108,7 @@ class AddProductScreen extends ConsumerWidget {
                           AddCategory(),
                         ],
                       ),
-
                       const Gap(16),
-
                       // الوصف
                       _buildLabel("وصف المنتج"),
                       const Gap(8),
@@ -120,54 +118,7 @@ class AddProductScreen extends ConsumerWidget {
                         prefixIcon: Icons.description_outlined,
                       ),
                       const Gap(16),
-                      // TODO اختيار الصورة
-                      // ReactiveFormConsumer(
-                      //   builder: (context, form, _) {
-                      //     final imageControl =
-                      //         form.control('image') as FormControl<XFile?>;
-                      //     final image = imageControl.value;
-
-                      //     return Column(
-                      //       children: [
-                      //         if (image != null)
-                      //           Image.file(
-                      //             File(image.path),
-                      //             height: 100,
-                      //             width: 100,
-                      //             fit: BoxFit.cover,
-                      //           ),
-                      //         const Gap(10),
-                      //         ElevatedButton.icon(
-                      //           icon: const Icon(Icons.image),
-                      //           label: Text(image == null
-                      //               ? 'اختيار صورة'
-                      //               : 'تغيير الصورة'),
-                      //           onPressed: () async {
-                      //             // طلب صلاحيات الكاميرا والتخزين
-                      //             bool granted = await PermissionsRequester
-                      //                 .requestCameraAndStoragePermissions();
-                      //             if (!granted) {
-                      //               ScaffoldMessenger.of(context).showSnackBar(
-                      //                 const SnackBar(
-                      //                   content: Text(
-                      //                       'يرجى منح الصلاحيات للكاميرا والتخزين'),
-                      //                 ),
-                      //               );
-                      //               return;
-                      //             }
-                      //             // متابعة اختيار الصورة
-                      //             final picker = ImagePicker();
-                      //             final picked = await picker.pickImage(
-                      //                 source: ImageSource.gallery);
-                      //             if (picked != null) {
-                      //               imageControl.value = picked;
-                      //             }
-                      //           },
-                      //         ),
-                      //       ],
-                      //     );
-                      //   },
-                      // ),
+                      // الصورة
                       ReactiveFormConsumer(
                         builder: (context, form, _) {
                           final imageControl =
@@ -175,13 +126,11 @@ class AddProductScreen extends ConsumerWidget {
                           final image = imageControl.value;
 
                           return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               ElevatedButton.icon(
                                 icon: const Icon(Icons.image),
-                                label: Text(image == null
-                                    ? 'اختيار صورة'
-                                    : 'تغيير الصورة'),
+                                label: Text('اختيار صورة'),
                                 onPressed: () async {
                                   // طلب صلاحيات الكاميرا والتخزين
                                   bool granted = await PermissionsRequester
@@ -216,9 +165,7 @@ class AddProductScreen extends ConsumerWidget {
                           );
                         },
                       ),
-
                       const Gap(24),
-
                       // زر الإضافة
                       _buildSubmitButton(ref, form, theme),
                     ],

@@ -50,23 +50,17 @@ class ProductDetailsScreen extends ConsumerWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(16),
-                      child: Image.asset(
-                        // product.image.isNotEmpty
-                        //     ? product.image
-                        //     :
-                        'assets/images/logo.png',
+                      child: Image.network(
+                        product.image.isNotEmpty
+                            ? product.image
+                            : 'https://via.placeholder.com/300x200.png?text=No+Image',
                         fit: BoxFit.cover,
-                        // loadingBuilder: (context, child, loadingProgress) {
-                        //   if (loadingProgress == null) return child;
-                        //   return Center(
-                        //     child: CircularProgressIndicator(
-                        //       value: loadingProgress.expectedTotalBytes != null
-                        //           ? loadingProgress.cumulativeBytesLoaded /
-                        //               loadingProgress.expectedTotalBytes!
-                        //           : null,
-                        //     ),
-                        //   );
-                        //},
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
                         errorBuilder: (context, error, stackTrace) => Container(
                           color: Colors.grey[200],
                           child: const Center(
@@ -78,6 +72,7 @@ class ProductDetailsScreen extends ConsumerWidget {
                     ),
                   ),
                 ),
+
                 Gap(10),
                 // ✅ الاسم والسعر
                 Row(
