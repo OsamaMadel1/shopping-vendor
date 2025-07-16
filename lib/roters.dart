@@ -8,7 +8,9 @@ import 'package:app/mangment_products/domain/entities/product_entity.dart';
 import 'package:app/mangment_products/presentation/screens/add_product_screen.dart';
 import 'package:app/mangment_products/presentation/screens/edit_product_screen.dart';
 import 'package:app/mangment_products/presentation/screens/product_details_screen.dart';
+import 'package:app/mangment_products/presentation/screens/product_screen.dart';
 import 'package:app/orders/presentation/screens/order_details_screen.dart';
+import 'package:app/orders/presentation/screens/orders_screen.dart';
 //import 'package:app/core/presentation/screens/welcome_screen.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -77,6 +79,11 @@ final router = Provider<GoRouter>((ref) {
       // ======== product ================
       // =================================
       GoRoute(
+        path: "/productScreen",
+        name: "productScreen",
+        builder: (context, state) => ProductScreen(),
+      ),
+      GoRoute(
         path: "/addProductScreen",
         name: "addProductScreen",
         builder: (context, state) => AddProductScreen(),
@@ -103,6 +110,11 @@ final router = Provider<GoRouter>((ref) {
       // =================================
       // ======== order ==================
       // =================================
+      GoRoute(
+        path: "/ordersScreen",
+        name: "ordersScreen",
+        builder: (context, state) => OrdersScreen(),
+      ),
       GoRoute(
         path: '/order/:id',
         name: 'orderDetailsScreen',
