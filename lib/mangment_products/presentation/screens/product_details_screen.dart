@@ -180,7 +180,7 @@ class ProductDetailsScreen extends ConsumerWidget {
                 const SnackBar(content: Text('تم حذف المنتج')),
               );
             },
-            child: Text('delete', style: TextStyle(color: Colors.red)),
+            child: Text('delete'.i18n, style: TextStyle(color: Colors.red)),
           ),
         ],
       ),

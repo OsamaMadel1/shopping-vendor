@@ -107,13 +107,13 @@ class LoginScreen extends ConsumerWidget {
                     ),
                     const Gap(20),
                     ReactiveTextInputWidget(
-                      hint: "Email",
+                      hint: "Email".i18n,
                       controllerName: "email",
                       prefixIcon: Icons.email_outlined,
                     ),
                     const Gap(40),
                     ReactivePasswordInputWidget(
-                      hint: "Password",
+                      hint: "Password".i18n,
                       controllerName: "password",
                       showEye: true,
                       textInputAction: TextInputAction.done,
@@ -127,7 +127,7 @@ class LoginScreen extends ConsumerWidget {
                           return TextButtonWidget(
                             foregroundColor:
                                 Theme.of(context).colorScheme.scrim,
-                            text: "Forgot Password?",
+                            text: "Forgot Password?".i18n,
                             onTap: control.invalid
                                 ? null
                                 : () {
@@ -142,7 +142,7 @@ class LoginScreen extends ConsumerWidget {
                       builder: (context, formGroup, child) {
                         return Center(
                           child: ButtonWidget(
-                            text: "Sign In",
+                            text: "Login".i18n,
                             isLoading: authState.status == AuthStatus.loading,
                             onTap: formGroup.invalid
                                 ? null

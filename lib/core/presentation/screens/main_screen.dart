@@ -23,8 +23,8 @@ class MainScreen extends ConsumerWidget {
         children: const [
           // ProductScreen(), // currentScreenIndex = 0
           //   OrdersScreen(), // currentScreenIndex = 1
-          HomeScreen(), // currentScreenIndex = 2
-          SettingsScreen(), // currentScreenIndex = 3
+          // HomeScreen(), // currentScreenIndex = 2
+          //SettingsScreen(), // currentScreenIndex = 3
           //SettingsScreen(), // currentScreenIndex = 4
           // CategoriesScreen(),
         ],

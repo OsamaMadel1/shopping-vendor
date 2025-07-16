@@ -1,6 +1,7 @@
 import 'package:app/authentication/application/providers/auth_notifier_provider.dart';
 import 'package:app/core/presentation/components/language_dialog_component.dart';
 import 'package:app/settings/presentation/widgets/settings_card_widget.dart';
+import 'package:app/translations.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,7 +18,7 @@ class SettingsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amber.shade300,
-        title: Center(child: Text('settings')),
+        title: Center(child: Text('settings'.i18n)),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -48,7 +49,7 @@ class SettingsScreen extends ConsumerWidget {
                 context.push('/categoryScreen');
               },
               icon: Icon(Icons.article),
-              title: "My Category",
+              title: "My Category".i18n,
             ),
             SettingsCardWidget(
               //about
@@ -67,7 +68,7 @@ class SettingsScreen extends ConsumerWidget {
                 );
               },
               icon: Icon(FontAwesomeIcons.language),
-              title: "Language",
+              title: "Language".i18n,
             ),
             SettingsCardWidget(
               //selectedTheme
@@ -76,7 +77,7 @@ class SettingsScreen extends ConsumerWidget {
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      title: Text("Select Theme"),
+                      title: Text("Select Theme".i18n),
                       content: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -116,7 +117,7 @@ class SettingsScreen extends ConsumerWidget {
                 );
               },
               icon: Icon(Icons.dark_mode),
-              title: "Theme",
+              title: "Theme".i18n,
             ),
             SettingsCardWidget(
               // logout
@@ -124,7 +125,7 @@ class SettingsScreen extends ConsumerWidget {
                 ref.read(authNotifierProvider.notifier).logout();
               },
               icon: Icon(Icons.logout),
-              title: "Log Out",
+              title: "Log Out".i18n,
             ),
           ],
         ),

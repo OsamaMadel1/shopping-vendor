@@ -17,6 +17,7 @@ void main() async {
 
   // Language ------------------------------------------------------------------
   await MyI18n.loadTranslations();
+
   // استرجاع اللغة المحفوظة أو التعيين الافتراضي
   final savedLanguage = sharedPrefs.getString("language") ?? "ar-SA";
   final localeParts = savedLanguage.split("-");

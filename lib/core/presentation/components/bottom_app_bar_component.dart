@@ -1,10 +1,10 @@
 //import 'package:app/authentication/application/providers/auth_notifier_provider.dart';
-import 'package:app/core/application/navigator_provider.dart';
-import 'package:app/translations.dart';
+//import 'package:app/core/application/navigator_provider.dart';
+//import 'package:app/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BottomAppBarComponent extends ConsumerWidget {
   const BottomAppBarComponent({
@@ -17,7 +17,7 @@ class BottomAppBarComponent extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     //var currenUser = ref.read(authNotifierProvider);
 
-    String? profileUrl;
+    //String? profileUrl;
     return BottomAppBar(
       padding: EdgeInsets.zero,
       color: Theme.of(context).colorScheme.tertiaryContainer,
@@ -105,84 +105,84 @@ class BottomAppBarComponent extends ConsumerWidget {
             //   ),
             // ),
 
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                      width: 3,
-                      color:
-                          currentScreenIndex == 0 ? Colors.black : Colors.white,
-                    ),
-                  ),
-                ),
-                child: MaterialButton(
-                  minWidth: 40,
-                  shape: CircleBorder(),
-                  onPressed: () {
-                    ref.read(navigationProvider.notifier).state = 0;
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.home,
-                        color: currentScreenIndex == 0
-                            ? Colors.black
-                            : Colors.white,
-                      ),
-                      Text(
-                        "home".i18n,
-                        style: TextStyle(
-                          color: currentScreenIndex == 0
-                              ? Colors.black
-                              : Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                      width: 3,
-                      color:
-                          currentScreenIndex == 1 ? Colors.black : Colors.white,
-                    ),
-                  ),
-                ),
-                child: MaterialButton(
-                  minWidth: 40,
-                  shape: CircleBorder(),
-                  onPressed: () {
-                    ref.read(navigationProvider.notifier).state = 1;
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        FontAwesomeIcons.userGear,
-                        color: currentScreenIndex == 1
-                            ? Colors.black
-                            : Colors.white,
-                      ),
-                      Text(
-                        "settings".i18n,
-                        style: TextStyle(
-                          color: currentScreenIndex == 1
-                              ? Colors.black
-                              : Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            // Expanded(
+            //   child: Container(
+            //     decoration: BoxDecoration(
+            //       border: Border(
+            //         top: BorderSide(
+            //           width: 3,
+            //           color:
+            //               currentScreenIndex == 0 ? Colors.black : Colors.white,
+            //         ),
+            //       ),
+            //     ),
+            //     child: MaterialButton(
+            //       minWidth: 40,
+            //       shape: CircleBorder(),
+            //       onPressed: () {
+            //         ref.read(navigationProvider.notifier).state = 0;
+            //       },
+            //       child: Column(
+            //         mainAxisAlignment: MainAxisAlignment.center,
+            //         children: [
+            //           Icon(
+            //             Icons.home,
+            //             color: currentScreenIndex == 0
+            //                 ? Colors.black
+            //                 : Colors.white,
+            //           ),
+            //           Text(
+            //             "home".i18n,
+            //             style: TextStyle(
+            //               color: currentScreenIndex == 0
+            //                   ? Colors.black
+            //                   : Colors.white,
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // Expanded(
+            //   child: Container(
+            //     decoration: BoxDecoration(
+            //       border: Border(
+            //         top: BorderSide(
+            //           width: 3,
+            //           color:
+            //               currentScreenIndex == 1 ? Colors.black : Colors.white,
+            //         ),
+            //       ),
+            //     ),
+            //     child: MaterialButton(
+            //       minWidth: 40,
+            //       shape: CircleBorder(),
+            //       onPressed: () {
+            //         ref.read(navigationProvider.notifier).state = 1;
+            //       },
+            //       child: Column(
+            //         mainAxisAlignment: MainAxisAlignment.center,
+            //         children: [
+            //           Icon(
+            //             FontAwesomeIcons.userGear,
+            //             color: currentScreenIndex == 1
+            //                 ? Colors.black
+            //                 : Colors.white,
+            //           ),
+            //           Text(
+            //             "settings".i18n,
+            //             style: TextStyle(
+            //               color: currentScreenIndex == 1
+            //                   ? Colors.black
+            //                   : Colors.white,
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
 
             // Expanded(
             //   child: Container(

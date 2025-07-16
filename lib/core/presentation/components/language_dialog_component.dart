@@ -26,7 +26,7 @@ class LanguageDialogComponent extends StatelessWidget {
               await prefs.setString('language', 'en-US');
               Intl.defaultLocale = 'en-US';
               await MyI18n.loadTranslations();
-              I18n.of(context).locale = const Locale('en', 'US');
+              I18n.of(context).locale = const Locale('en', 'us');
               Navigator.of(context).pop();
             },
           ),
@@ -39,7 +39,7 @@ class LanguageDialogComponent extends StatelessWidget {
               await prefs.setString('language', 'ar-SA');
               Intl.defaultLocale = 'ar-SA';
               await MyI18n.loadTranslations();
-              I18n.of(context).locale = const Locale('ar', 'SA');
+              I18n.of(context).locale = const Locale('ar', 'sa');
               Navigator.of(context).pop();
             },
           ),

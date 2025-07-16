@@ -8,7 +8,7 @@ class MyI18n {
 
   static Future<void> loadTranslations() async {
     translations +=
-        await JSONImporter().fromAssetDirectory("assets/translationsJsons/");
+        await JSONImporter().fromAssetDirectory("assets/translations/");
   }
 }
 

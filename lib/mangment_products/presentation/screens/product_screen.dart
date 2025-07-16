@@ -89,7 +89,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: ButtonWidget(
-              text: "add product",
+              text: "add product".i18n,
               onTap: () {
                 context.push('/addProductScreen');
               },

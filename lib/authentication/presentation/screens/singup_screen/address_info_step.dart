@@ -23,13 +23,13 @@ class AddressInfoStep extends StatelessWidget {
           ),
         ),
         ReactiveTextInputWidget(
-          hint: "City",
+          hint: "City".i18n,
           controllerName: "city",
           prefixIcon: Icons.location_city,
         ),
         const Gap(20),
         ReactiveTextInputWidget(
-          hint: "Street",
+          hint: "Street".i18n,
           controllerName: "street",
           prefixIcon: Icons.streetview,
         ),
@@ -39,14 +39,14 @@ class AddressInfoStep extends StatelessWidget {
           children: [
             Expanded(
               child: ReactiveTextInputWidget(
-                hint: "Floor",
+                hint: "Floor".i18n,
                 controllerName: "floor",
                 prefixIcon: Icons.apartment,
               ),
             ),
             Expanded(
               child: ReactiveTextInputWidget(
-                hint: "Apartment",
+                hint: "Apartment".i18n,
                 controllerName: "apartment",
                 prefixIcon: Icons.home,
               ),

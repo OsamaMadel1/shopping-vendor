@@ -24,7 +24,7 @@ class AddCategory extends ConsumerWidget {
           _showAddCategoryDialog(context, notifier);
         },
         icon: const Icon(Icons.add),
-        tooltip: 'Add Categroy'.i18n,
+        tooltip: 'Add Category'.i18n,
       ),
     );
   }
@@ -38,7 +38,7 @@ class AddCategory extends ConsumerWidget {
       context: context,
       builder: (_) => AlertDialog(
         title: Center(
-          child: Text('Add Categroy'.i18n),
+          child: Text('Add Category'.i18n),
         ),
         content: ReactiveForm(
             formGroup: form,

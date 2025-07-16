@@ -25,19 +25,19 @@ class ContactInfoStep extends StatelessWidget {
         ),
         const Gap(15),
         ReactiveTextInputWidget(
-          hint: "Email",
+          hint: "Email".i18n,
           controllerName: "email",
           prefixIcon: Icons.email_outlined,
         ),
         const Gap(15),
         ReactivePasswordInputWidget(
-          hint: "Password",
+          hint: "Password".i18n,
           controllerName: "password",
           showEye: true,
         ),
         const Gap(15),
         ReactivePasswordInputWidget(
-          hint: "Confirm Password",
+          hint: "Confirm Password".i18n,
           controllerName: "confirmPassword",
           showEye: true,
         ),

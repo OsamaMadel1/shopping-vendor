@@ -1,5 +1,6 @@
 import 'package:app/core/presentation/widgets/text_widget.dart';
 import 'package:app/orders/application/providers/get_order_by_id_provider.dart';
+import 'package:app/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
@@ -16,7 +17,7 @@ class OrderDetailsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar:
-          AppBar(title: Center(child: const TextWidget(text: 'تفاصيل الطلب'))),
+          AppBar(title: Center(child: TextWidget(text: 'details order'.i18n))),
       body: orderAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, _) => Center(child: Text('خطأ: $error')),
@@ -26,20 +27,21 @@ class OrderDetailsScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('رقم الطلب: ${order.id.substring(0, 8)}',
+                Text('order number: ${order.id.substring(0, 8)}'.i18n,
                     style: const TextStyle(
                         fontSize: 16, fontWeight: FontWeight.bold)),
                 const Gap(8),
                 Text(
-                    'تاريخ الطلب: ${DateFormat('yyyy-MM-dd HH:mm').format(order.orderDate)}'),
-                const Gap(8), Text('الحالة: ${order.orderState}'),
+                    'order date: ${DateFormat('yyyy-MM-dd HH:mm').format(order.orderDate)}'
+                        .i18n),
+                const Gap(8), Text('state: ${order.orderState}'.i18n),
                 const Gap(8),
-                Text('الإجمالي: ${order.totalAmount}'),
+                Text('total: ${order.totalAmount}'.i18n),
                 const Gap(16),
                 const Divider(),
                 Center(
-                    child: const TextWidget(
-                  text: 'العناصر',
+                    child: TextWidget(
+                  text: 'items'.i18n,
                   fontSize: 16,
                 )),
                 const Gap(8),
@@ -50,7 +52,7 @@ class OrderDetailsScreen extends ConsumerWidget {
                     margin: const EdgeInsets.symmetric(vertical: 6),
                     child: ListTile(
                       title: Text(item.productName),
-                      subtitle: Text('الكمية: ${item.quantity}'),
+                      subtitle: Text('quantity: ${item.quantity}'.i18n),
                       trailing: Text('${item.price}'),
                     ),
                   ),

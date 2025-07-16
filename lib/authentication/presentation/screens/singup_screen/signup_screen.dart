@@ -129,7 +129,7 @@ class SignupScreen extends ConsumerWidget {
                               onTap: () {
                                 ref.read(stepProvider.notifier).state--;
                               },
-                              text: "Back",
+                              text: "Back".i18n,
                             ),
                           const Spacer(),
                           ReactiveFormConsumer(
@@ -137,7 +137,7 @@ class SignupScreen extends ConsumerWidget {
                               final isLastStep = currentStep == 2;
 
                               return ButtonWidget(
-                                text: isLastStep ? "Sign Up" : "Next",
+                                text: isLastStep ? "Sign Up".i18n : "Next".i18n,
                                 isLoading:
                                     authState.status == AuthStatus.loading,
                                 onTap: () async {
@@ -194,7 +194,7 @@ class SignupScreen extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            " you are have acount?".i18n,
+                            "Do you already have an account?".i18n,
                             style: TextStyle(color: Colors.grey.shade400),
                           ),
                           Gap(3),
@@ -203,7 +203,7 @@ class SignupScreen extends ConsumerWidget {
                               context.push("/login");
                             },
                             child: TextWidget(
-                              text: 'login',
+                              text: 'login'.i18n,
                             ),
                           ),
                         ],

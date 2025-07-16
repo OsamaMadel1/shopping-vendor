@@ -26,20 +26,20 @@ class PersonalInfoStep extends StatelessWidget {
         ),
         const Gap(20),
         ReactiveTextInputWidget(
-          hint: "First Name",
+          hint: "First Name".i18n,
           controllerName: "firstName",
           prefixIcon: Icons.person,
         ),
         const Gap(20),
         ReactiveTextInputWidget(
-          hint: "Last Name",
+          hint: "Last Name".i18n,
           controllerName: "lastName",
           prefixIcon: Icons.person,
         ),
         const Gap(20),
         ReactiveDropdownGenderWidget<GenderEntity>(
           controllerName: 'gender',
-          hintText: 'select gender ',
+          hintText: 'select gender'.i18n,
           // prefixIcon: Icons.person_outline,
           items: GenderEntity.values,
           itemBuilder: (gender) => Row(
@@ -50,7 +50,7 @@ class PersonalInfoStep extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               TextWidget(
-                text: gender == GenderEntity.male ? 'male' : 'femal',
+                text: gender == GenderEntity.male ? 'male'.i18n : 'femal'.i18n,
               ),
             ],
           ),

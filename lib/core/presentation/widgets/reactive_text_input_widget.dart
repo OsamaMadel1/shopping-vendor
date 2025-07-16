@@ -44,7 +44,7 @@ class ReactiveTextInputWidget extends StatelessWidget {
             prefixIcon,
             color: AppColor.kPrimaryColor,
           ),
-          labelText: hint.i18n,
+          labelText: hint,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(

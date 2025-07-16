@@ -83,10 +83,10 @@ class AddProductScreen extends ConsumerWidget {
                       const Divider(height: 24),
 
                       // اسم المنتج
-                      _buildLabel("name product"),
+                      _buildLabel("name product".i18n),
                       const Gap(8),
                       ReactiveTextInputWidget(
-                        hint: 'enter name product',
+                        hint: 'enter name product'.i18n,
                         controllerName: 'nameProduct',
                         prefixIcon: Icons.shopping_bag_outlined,
                       ),
@@ -97,14 +97,14 @@ class AddProductScreen extends ConsumerWidget {
                       const Gap(16),
 
                       // الفئة
-                      _buildLabel("categroy"),
+                      _buildLabel("categroy".i18n),
                       const Gap(8),
                       Row(
-                        children: const [
+                        children: [
                           Expanded(
                             child: CategoryDropdown(
                               formControlName: "categoryId",
-                              labelText: "chess categroy ",
+                              labelText: "chess category".i18n,
                             ),
                           ),
                           SizedBox(width: 8),
@@ -113,10 +113,10 @@ class AddProductScreen extends ConsumerWidget {
                       ),
                       const Gap(16),
                       // الوصف
-                      _buildLabel("product description"),
+                      _buildLabel("product description".i18n),
                       const Gap(8),
                       ReactiveTextInputWidget(
-                        hint: 'enter descriotion product',
+                        hint: 'enter descriotion product'.i18n,
                         controllerName: 'descriptionProduct',
                         prefixIcon: Icons.description_outlined,
                       ),
@@ -191,7 +191,7 @@ class AddProductScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildLabel("price"),
+              _buildLabel("price".i18n),
               const Gap(8),
               ReactiveTextInputWidget(
                 hint: '0.00',
@@ -206,7 +206,7 @@ class AddProductScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildLabel("currency"),
+              _buildLabel("currency".i18n),
               const Gap(8),
               Directionality(
                 textDirection: TextDirection.ltr,

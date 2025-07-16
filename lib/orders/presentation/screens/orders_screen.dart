@@ -1,5 +1,6 @@
 import 'package:app/authentication/application/providers/auth_notifier_provider.dart';
 import 'package:app/orders/application/providers/order_notifier_provider.dart';
+import 'package:app/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -31,7 +32,7 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: const Text('الطلبات')),
+        title: Center(child: Text('orders'.i18n)),
       ),
       body: Builder(
         builder: (context) {
@@ -46,8 +47,8 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> {
           }
 
           if (state.orders.isEmpty) {
-            return const Center(
-              child: Text('لا توجد طلبات حالياً'),
+            return Center(
+              child: Text('not orders'.i18n),
             );
           }
 
@@ -58,9 +59,10 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> {
               return Card(
                 margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: ListTile(
-                  title: Text('طلب #${order.id.substring(0, 6)}'),
-                  subtitle: Text('الحالة: ${order.orderState}\n'
-                      'المبلغ: ${order.totalAmount}'),
+                  title: Text('order #${order.id.substring(0, 6)}'.i18n),
+                  subtitle: Text('state: ${order.orderState}\n'
+                          'amount: ${order.totalAmount}'
+                      .i18n),
                   trailing: const Icon(Icons.arrow_forward_ios),
                   onTap: () {
                     context.pushNamed(

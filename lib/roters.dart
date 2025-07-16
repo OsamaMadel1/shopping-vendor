@@ -2,6 +2,7 @@ import 'package:app/authentication/application/auth_state.dart';
 import 'package:app/authentication/application/providers/auth_notifier_provider.dart';
 import 'package:app/authentication/presentation/screens/login_screen.dart';
 import 'package:app/authentication/presentation/screens/singup_screen/signup_screen.dart';
+import 'package:app/core/presentation/screens/home_screen.dart';
 //import 'package:app/category/presentation/screens/categories_screen.dart';
 import 'package:app/core/presentation/screens/main_screen.dart';
 import 'package:app/mangment_products/domain/entities/product_entity.dart';
@@ -11,6 +12,7 @@ import 'package:app/mangment_products/presentation/screens/product_details_scree
 import 'package:app/mangment_products/presentation/screens/product_screen.dart';
 import 'package:app/orders/presentation/screens/order_details_screen.dart';
 import 'package:app/orders/presentation/screens/orders_screen.dart';
+import 'package:app/settings/presentation/screens/settings_screen.dart';
 //import 'package:app/core/presentation/screens/welcome_screen.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -42,7 +44,8 @@ final router = Provider<GoRouter>((ref) {
 
       // إذا المستخدم مسجل دخول ويحاول يروح لشاشات تسجيل الدخول أو التسجيل
       if (isAuthenticated && isLoggingIn) {
-        return '/mainScreen'; // نعيده للشاشة الرئيسية
+        //return '/mainScreen'; // نعيده للشاشة الرئيسية
+        return '/homeScreen';
       }
 
       // تابع بدون إعادة توجيه
@@ -74,6 +77,12 @@ final router = Provider<GoRouter>((ref) {
         path: "/mainScreen",
         name: "mainScreen",
         builder: (context, state) => MainScreen(),
+      ),
+
+      GoRoute(
+        path: "/homeScreen",
+        name: "homeScreen",
+        builder: (context, state) => HomeScreen(),
       ),
       // =================================
       // ======== product ================
@@ -124,6 +133,13 @@ final router = Provider<GoRouter>((ref) {
         },
       ),
       //-----------------------------------
+      GoRoute(
+        path: '/settingsScreen',
+        name: 'settingsScreen',
+        builder: (context, state) {
+          return SettingsScreen();
+        },
+      )
 
       // =================================
       // ======== category================
