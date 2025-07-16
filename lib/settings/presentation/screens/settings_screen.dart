@@ -1,4 +1,5 @@
 import 'package:app/authentication/application/providers/auth_notifier_provider.dart';
+import 'package:app/core/presentation/components/language_dialog_component.dart';
 import 'package:app/settings/presentation/widgets/settings_card_widget.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
@@ -61,8 +62,7 @@ class SettingsScreen extends ConsumerWidget {
                 showDialog(
                   context: context,
                   builder: (context) {
-                    //return const LanguageDialogComponent();
-                    return SizedBox();
+                    return const LanguageDialogComponent();
                   },
                 );
               },

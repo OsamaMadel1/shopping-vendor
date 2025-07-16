@@ -1,9 +1,13 @@
 import 'package:app/authentication/application/providers/auth_notifier_provider.dart';
 import 'package:app/authentication/data/providers/dio_provider.dart';
 import 'package:app/roters.dart';
+import 'package:app/translations.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:i18n_extension/i18n_extension.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -11,12 +15,20 @@ void main() async {
 
   final sharedPrefs = await SharedPreferences.getInstance();
 
+  // Language ------------------------------------------------------------------
+  await MyI18n.loadTranslations();
+  // استرجاع اللغة المحفوظة أو التعيين الافتراضي
+  final savedLanguage = sharedPrefs.getString("language") ?? "ar-SA";
+  final localeParts = savedLanguage.split("-");
+  final locale = Locale(localeParts[0], localeParts[1]);
+  Intl.defaultLocale = savedLanguage;
+  // ---------------------------------------------------------------------------
   runApp(
     ProviderScope(
       overrides: [
         sharedPrefsProvider.overrideWithValue(sharedPrefs),
       ],
-      child: const MyApp(),
+      child: I18n(initialLocale: locale, child: MyApp()),
     ),
   );
 }
@@ -57,6 +69,16 @@ class _MyAppState extends ConsumerState<MyApp> {
       builder: BotToastInit(),
       debugShowCheckedModeBanner: false,
       routerConfig: ref.watch(router),
+      localizationsDelegates: [
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en', 'US'),
+        Locale('ar', 'SA'),
+      ],
+      locale: I18n.of(context).locale,
     );
   }
 }
