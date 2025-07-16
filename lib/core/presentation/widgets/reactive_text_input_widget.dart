@@ -1,7 +1,7 @@
+import 'package:app/core/presentation/widgets/wid/colors.dart';
+import 'package:app/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-
-// enum InputStyle { underlined, outlined, filled }
 
 // ignore: must_be_immutable
 class ReactiveTextInputWidget extends StatelessWidget {
@@ -10,53 +10,63 @@ class ReactiveTextInputWidget extends StatelessWidget {
     required this.hint,
     this.validationMessages,
     required this.controllerName,
-    // this.inputStyle,
     this.textInputAction,
     this.prefixIcon,
   });
   final String hint;
   Map<String, String Function(Object)>? validationMessages;
   final String controllerName;
-  // final InputStyle? inputStyle;
   final TextInputAction? textInputAction;
   final IconData? prefixIcon;
 
   @override
   Widget build(BuildContext context) {
-    return ReactiveTextField(
-      textInputAction: textInputAction ?? TextInputAction.done,
-      formControlName: controllerName,
-      // keyboardType: TextInputType.number,
-      //maxLines: 3,
-      decoration: InputDecoration(
-          labelStyle: TextStyle(color: Colors.teal[300]),
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      child: ReactiveTextField(
+        textInputAction: textInputAction ?? TextInputAction.done,
+        formControlName: controllerName,
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 18, // زيادة المساحة الرأسية
+          ),
+          floatingLabelBehavior: FloatingLabelBehavior.auto,
+          errorMaxLines: 3,
+          filled: true, // تفعيل الخلفية
+          fillColor: Colors.grey[100], // لون خلفية فاتح
+          labelStyle: TextStyle(
+            color: AppColor.kPrimaryColor,
+            fontWeight: FontWeight.bold, // خط عريض
+            fontSize: 16, // حجم أكبر للنص
+          ),
           prefixIcon: Icon(
             prefixIcon,
-            color: Colors.teal[300],
+            color: AppColor.kPrimaryColor,
           ),
-          // filled: inputStyle == InputStyle.filled,
-          labelText: hint,
-          border:
-              // inputStyle == InputStyle.outlined?
-              OutlineInputBorder(
+          labelText: hint.i18n,
+          border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-          )
-          //  : inputStyle == InputStyle.filled
-          //   ? OutlineInputBorder(
-          //    borderSide: BorderSide.none,
-          //    borderRadius: BorderRadius.circular(10),
-          //    )
-          //   : UnderlineInputBorder(),
-          //  fillColor: inputStyle == InputStyle.filled
-          //  ? Theme.of(context).colorScheme.outlineVariant
-          //  : null,
+            borderSide: BorderSide(
+              color: Colors.grey[400]!, // لون حدود أفتح
+              width: 1.5,
+            ),
           ),
-      validationMessages: validationMessages ??
-          {
-            "required": (o) => "Required",
-            "email": (o) => "Email is not valid",
-            "minLength": (o) => "Too short",
-          },
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              color: AppColor.kPrimaryColor, // لون حدود عند التركيز
+              width: 2,
+            ),
+          ),
+        ),
+        validationMessages: validationMessages ??
+            {
+              "required": (o) => "Required".i18n,
+              "email": (o) => "Email is not valid".i18n,
+              "minLength": (o) => "Too short".i18n,
+            },
+      ),
     );
   }
 }

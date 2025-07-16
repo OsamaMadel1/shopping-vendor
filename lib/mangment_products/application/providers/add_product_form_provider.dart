@@ -25,7 +25,9 @@ final addProductFormProvider = Provider.autoDispose<FormGroup>((ref) {
         Validators.minLength(5),
       ],
     ),
-    'image': FormControl<XFile?>(),
+    'image': FormControl<XFile?>(validators: [
+      Validators.required,
+    ]),
     'categoryId': FormControl<String>(validators: [
       Validators.required,
     ]),

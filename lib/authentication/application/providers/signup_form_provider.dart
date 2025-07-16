@@ -35,12 +35,12 @@ final signUpFormProvider = Provider(
       ),
       'confirmPassword': FormControl<String>(validators: [Validators.required]),
       "phone": FormControl<PhoneNumber?>(validators: [Validators.required]),
-      'dateOfBirth': FormControl<DateTime>(validators: [Validators.required]),
+      // 'dateOfBirth': FormControl<DateTime>(validators: [Validators.required]),
       'city': FormControl<String>(validators: [Validators.required]),
       'street': FormControl<String>(validators: [Validators.required]),
       'floor': FormControl<String>(validators: [Validators.required]),
       'apartment': FormControl<String>(validators: [Validators.required]),
-      "hasApartment": FormControl<bool>(value: false),
+      // "hasApartment": FormControl<bool>(value: false),
       "gender": FormControl<GenderEntity>(validators: [Validators.required]),
     }, validators: [
       CustumValidator()

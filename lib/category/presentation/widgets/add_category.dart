@@ -1,3 +1,6 @@
+import 'package:app/core/presentation/widgets/reactive_text_input_widget.dart';
+import 'package:app/core/presentation/widgets/wid/colors.dart';
+import 'package:app/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -11,12 +14,18 @@ class AddCategory extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.read(categoryNotifierProvider.notifier);
 
-    return IconButton(
-      onPressed: () {
-        _showAddCategoryDialog(context, notifier);
-      },
-      icon: const Icon(Icons.add),
-      tooltip: 'إضافة فئة جديدة',
+    return Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: AppColor.kPrimaryColor, // لون الخلفية
+      ),
+      child: IconButton(
+        onPressed: () {
+          _showAddCategoryDialog(context, notifier);
+        },
+        icon: const Icon(Icons.add),
+        tooltip: 'Add Categroy'.i18n,
+      ),
     );
   }
 
@@ -28,31 +37,34 @@ class AddCategory extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('إضافة فئة جديدة'),
-        content: ReactiveForm(
-          formGroup: form,
-          child: ReactiveTextField<String>(
-            formControlName: 'name',
-            decoration: const InputDecoration(
-              labelText: 'اسم الفئة',
-              border: OutlineInputBorder(),
-            ),
-          ),
+        title: Center(
+          child: Text('Add Categroy'.i18n),
         ),
+        content: ReactiveForm(
+            formGroup: form,
+            child: ReactiveTextInputWidget(
+              hint: 'name categroy'.i18n,
+              controllerName: 'name',
+            )),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('إلغاء'),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              if (form.valid) {
-                final name = form.control('name').value as String;
-                await notifier.addCategory(name);
-                Navigator.pop(context);
-              }
-            },
-            child: const Text('إضافة'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('cancel'.i18n),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  if (form.valid) {
+                    final name = form.control('name').value as String;
+                    await notifier.addCategory(name);
+                    Navigator.pop(context);
+                  }
+                },
+                child: Text('add'.i18n),
+              ),
+            ],
           ),
         ],
       ),

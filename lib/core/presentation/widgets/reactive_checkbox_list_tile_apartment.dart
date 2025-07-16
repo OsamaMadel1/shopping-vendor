@@ -1,3 +1,4 @@
+import 'package:app/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -22,7 +23,7 @@ class ReactiveCheckboxApartment extends StatelessWidget {
       child: ReactiveCheckboxListTile(
         formControlName: controlName,
         title: Text(
-          label,
+          label.i18n,
           style: TextStyle(fontSize: 14, color: Colors.teal[700]),
         ),
         controlAffinity: ListTileControlAffinity.leading,

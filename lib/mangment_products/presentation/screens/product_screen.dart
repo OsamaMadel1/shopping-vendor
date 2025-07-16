@@ -1,5 +1,6 @@
 import 'package:app/authentication/application/providers/auth_notifier_provider.dart';
 import 'package:app/category/application/providers/category_notifier_provider.dart';
+import 'package:app/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:local_hero/local_hero.dart';
@@ -44,7 +45,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('product Screen'),
+        title: Text('product Screen'.i18n),
         backgroundColor: Colors.amber.shade300,
         actions: [
           IconButton(
@@ -55,7 +56,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
           ),
           IconButton(
             icon: const Icon(Icons.filter_alt),
-            tooltip: "فلترة حسب الفئة",
+            tooltip: "filter by category".i18n,
             onPressed: () async {
               final selectedCategoryId = await showDialog<String?>(
                 context: context,
@@ -104,7 +105,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
       return const Center(child: CircularProgressIndicator());
     } else if (state is ProductLoaded) {
       if (state.products.isEmpty) {
-        return const Center(child: Text('لا توجد منتجات'));
+        return Center(child: Text('not products'.i18n));
       }
 
       final products = state.products;
@@ -158,38 +159,202 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
     }
   }
 
+  // Widget _buildProductCard(product, String heroTag) {
+  //   return LocalHero(
+  //     tag: heroTag,
+  //     child: SizedBox(
+  //       height: _isGrid ? 280 : 140,
+  //       child: Card(
+  //         shape:
+  //             RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+  //         elevation: 4,
+  //         child: _isGrid
+  //             ? Column(
+  //                 crossAxisAlignment: CrossAxisAlignment.stretch,
+  //                 children: [
+  //                   Expanded(
+  //                     child: ClipRRect(
+  //                       borderRadius: const BorderRadius.vertical(
+  //                           top: Radius.circular(15)),
+  //                       child: Image.network(
+  //                         product.image,
+  //                         fit: BoxFit.cover,
+  //                         errorBuilder: (_, __, ___) =>
+  //                             const Icon(Icons.image_not_supported),
+  //                       ),
+  //                     ),
+  //                   ),
+  //                   Padding(
+  //                     padding: const EdgeInsets.all(8.0),
+  //                     child: Column(
+  //                       crossAxisAlignment: CrossAxisAlignment.start,
+  //                       children: [
+  //                         Row(
+  //                           mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //                           children: [
+  //                             Text(
+  //                               product.name,
+  //                               style: const TextStyle(
+  //                                   fontWeight: FontWeight.bold, fontSize: 16),
+  //                               maxLines: 1,
+  //                               overflow: TextOverflow.ellipsis,
+  //                             ),
+  //                             Text(
+  //                               'price: ${product.price}${product.currency}',
+  //                               style: const TextStyle(color: Colors.teal),
+  //                             ),
+  //                           ],
+  //                         ),
+  //                         const Gap(5),
+  //                         Center(
+  //                           child: ButtonWidget(
+  //                             text: 'details',
+  //                             onTap: () {
+  //                               // context.push('/productDetailsScreen',
+  //                               //     extra: product);
+  //                               context.pushNamed(
+  //                                 'productDetailsScreen',
+  //                                 pathParameters: {'id': product.id!},
+  //                               );
+  //                             },
+  //                           ),
+  //                         ),
+  //                       ],
+  //                     ),
+  //                   ),
+  //                 ],
+  //               )
+  //             : Row(
+  //                 children: [
+  //                   ClipRRect(
+  //                     borderRadius:
+  //                         const BorderRadius.vertical(top: Radius.circular(15)),
+  //                     child: Image.network(
+  //                       product.image,
+  //                       fit: BoxFit.cover,
+  //                       errorBuilder: (_, __, ___) =>
+  //                           const Icon(Icons.image_not_supported),
+  //                     ),
+  //                   ),
+  //                   const Gap(30),
+  //                   Expanded(
+  //                     child: Padding(
+  //                       padding: const EdgeInsets.all(12.0),
+  //                       child: Column(
+  //                         mainAxisAlignment: MainAxisAlignment.center,
+  //                         children: [
+  //                           Text(
+  //                             product.name,
+  //                             style: const TextStyle(
+  //                                 fontWeight: FontWeight.bold, fontSize: 16),
+  //                             maxLines: 1,
+  //                             overflow: TextOverflow.ellipsis,
+  //                           ),
+  //                           Text(
+  //                             'price: ${product.price}${product.currency}',
+  //                             style: const TextStyle(color: Colors.teal),
+  //                           ),
+  //                           const Gap(5),
+  //                           Align(
+  //                             alignment: Alignment.center,
+  //                             child: ButtonWidget(
+  //                               text: 'details',
+  //                               onTap: () {
+  //                                 context.pushNamed('productDetailsScreen',
+  //                                     pathParameters: {'id': product.id!});
+  //                               },
+  //                             ),
+  //                           ),
+  //                         ],
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
   Widget _buildProductCard(product, String heroTag) {
     return LocalHero(
       tag: heroTag,
       child: SizedBox(
         height: _isGrid ? 280 : 140,
-        child: Card(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          elevation: 4,
-          child: _isGrid
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(
-                      child: ClipRRect(
-                        borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(15)),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(15),
+          onTap: () {
+            context.pushNamed(
+              'productDetailsScreen',
+              pathParameters: {'id': product.id!},
+            );
+          },
+          child: Card(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            elevation: 4,
+            child: _isGrid
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(15)),
+                          child: Image.network(
+                            product.image,
+                            fit: BoxFit.cover,
+                            errorBuilder: (_, __, ___) =>
+                                const Icon(Icons.image_not_supported),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                product.name,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            Text(
+                              'price: ${product.price}${product.currency}',
+                              style: const TextStyle(color: Colors.teal),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )
+                : Row(
+                    children: [
+                      ClipRRect(
+                        borderRadius: const BorderRadius.horizontal(
+                            left: Radius.circular(15)),
                         child: Image.network(
                           product.image,
+                          height: double.infinity,
+                          width: 120,
                           fit: BoxFit.cover,
                           errorBuilder: (_, __, ___) =>
                               const Icon(Icons.image_not_supported),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      const Gap(16),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 product.name,
@@ -204,72 +369,11 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
                               ),
                             ],
                           ),
-                          const Gap(5),
-                          Center(
-                            child: ButtonWidget(
-                              text: 'details',
-                              onTap: () {
-                                // context.push('/productDetailsScreen',
-                                //     extra: product);
-                                context.pushNamed(
-                                  'productDetailsScreen',
-                                  pathParameters: {'id': product.id!},
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                )
-              : Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius:
-                          const BorderRadius.vertical(top: Radius.circular(15)),
-                      child: Image.network(
-                        product.image,
-                        fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) =>
-                            const Icon(Icons.image_not_supported),
-                      ),
-                    ),
-                    const Gap(30),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              product.name,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            Text(
-                              'price: ${product.price}${product.currency}',
-                              style: const TextStyle(color: Colors.teal),
-                            ),
-                            const Gap(5),
-                            Align(
-                              alignment: Alignment.center,
-                              child: ButtonWidget(
-                                text: 'details',
-                                onTap: () {
-                                  context.pushNamed('productDetailsScreen',
-                                      pathParameters: {'id': product.id!});
-                                },
-                              ),
-                            ),
-                          ],
                         ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+          ),
         ),
       ),
     );

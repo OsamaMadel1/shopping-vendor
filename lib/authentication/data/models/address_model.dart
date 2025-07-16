@@ -5,14 +5,14 @@ class AddressModel {
   final String street;
   final String floor;
   final String apartment;
-  final bool defaultAddress;
+  bool defaultAddress;
 
   AddressModel({
     required this.city,
     required this.street,
     required this.floor,
     required this.apartment,
-    required this.defaultAddress,
+    this.defaultAddress = true,
   });
 
   factory AddressModel.fromEntity(AddressEntity entity) {
@@ -21,7 +21,7 @@ class AddressModel {
       street: entity.street,
       floor: entity.floor,
       apartment: entity.apartment,
-      defaultAddress: entity.defaultAddress,
+      //defaultAddress: entity.defaultAddress,
     );
   }
 

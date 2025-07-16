@@ -1,3 +1,4 @@
+import 'package:app/core/presentation/widgets/wid/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_phone_form_field/reactive_phone_form_field.dart';
 
@@ -15,7 +16,7 @@ class ReactivePhoneWidget extends StatelessWidget {
         hintText: "xxxxxxxxx",
         suffixIcon: Icon(
           suffixIcon,
-          color: Colors.teal,
+          color: AppColor.kPrimaryColor,
         ),
       ),
       isCountryButtonPersistent: true,

@@ -1,5 +1,7 @@
 import 'package:app/core/presentation/widgets/reactive_checkbox_list_tile_apartment.dart';
 import 'package:app/core/presentation/widgets/reactive_text_input_widget.dart';
+import 'package:app/core/presentation/widgets/wid/colors.dart';
+import 'package:app/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -10,27 +12,30 @@ class AddressInfoStep extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          children: [
-            Expanded(
-              child: ReactiveTextInputWidget(
-                hint: "City",
-                controllerName: "city",
-                prefixIcon: Icons.location_city,
-              ),
+        Center(
+          child: Text(
+            'address information'.i18n,
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: AppColor.kPrimaryColor,
             ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: ReactiveTextInputWidget(
-                hint: "Street",
-                controllerName: "street",
-                prefixIcon: Icons.location_on,
-              ),
-            ),
-          ],
+          ),
+        ),
+        ReactiveTextInputWidget(
+          hint: "City",
+          controllerName: "city",
+          prefixIcon: Icons.location_city,
+        ),
+        const Gap(20),
+        ReactiveTextInputWidget(
+          hint: "Street",
+          controllerName: "street",
+          prefixIcon: Icons.streetview,
         ),
         const Gap(20),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Expanded(
               child: ReactiveTextInputWidget(
@@ -39,21 +44,21 @@ class AddressInfoStep extends StatelessWidget {
                 prefixIcon: Icons.apartment,
               ),
             ),
-            const SizedBox(width: 16),
             Expanded(
               child: ReactiveTextInputWidget(
                 hint: "Apartment",
                 controllerName: "apartment",
-                prefixIcon: Icons.apartment,
+                prefixIcon: Icons.home,
               ),
             ),
           ],
         ),
-        const Gap(10),
-        const ReactiveCheckboxApartment(
-          controlName: "hasApartment",
-          label: "Have Apartment?",
-        ),
+
+        // const Gap(20),
+        // const ReactiveCheckboxApartment(
+        //   controlName: "hasApartment",
+        //   label: "Have Apartment?",
+        // ),
       ],
     );
   }

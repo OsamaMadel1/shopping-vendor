@@ -1,4 +1,6 @@
 import 'package:app/category/application/providers/category_notifier_provider.dart';
+import 'package:app/core/presentation/widgets/wid/colors.dart';
+import 'package:app/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -26,8 +28,11 @@ class CategoryDropdown extends ConsumerWidget {
     return ReactiveDropdownField<String>(
       formControlName: formControlName,
       decoration: InputDecoration(
-        labelText: labelText,
-        prefixIcon: const Icon(Icons.category_outlined),
+        labelText: labelText?.i18n,
+        prefixIcon: Icon(
+          Icons.category_outlined,
+          color: AppColor.kPrimaryColor,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
         ),
@@ -35,9 +40,9 @@ class CategoryDropdown extends ConsumerWidget {
       ),
       items: state.isLoading
           ? [
-              const DropdownMenuItem(
+              DropdownMenuItem(
                 value: null,
-                child: Text('... جارٍ التحميل'),
+                child: Text('loading ....'.i18n),
               )
             ]
           : state.categories

@@ -1,3 +1,4 @@
+import 'package:app/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -31,7 +32,7 @@ class ReactiveDatePickerWidget extends StatelessWidget {
             ),
             child: Text(
               picker.value == null
-                  ? 'Select your birth date'
+                  ? 'Select your birth date'.i18n
                   : picker.value!.toLocal().toString().split(' ')[0],
               style: TextStyle(
                 color: Colors.teal[300],

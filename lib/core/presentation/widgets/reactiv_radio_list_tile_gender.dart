@@ -1,4 +1,5 @@
 import 'package:app/authentication/domain/value_objects/gender_entity.dart';
+import 'package:app/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -27,7 +28,7 @@ class ReactivRadioListTileGender extends StatelessWidget {
         formControlName: controlName,
         value: gender,
         title: Text(
-          label,
+          label.i18n,
           style: TextStyle(fontSize: 14, color: Colors.teal[300]),
         ),
         visualDensity: VisualDensity.compact,

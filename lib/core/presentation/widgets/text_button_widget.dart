@@ -1,3 +1,4 @@
+import 'package:app/translations.dart';
 import 'package:flutter/material.dart';
 
 class TextButtonWidget extends StatelessWidget {
@@ -21,7 +22,7 @@ class TextButtonWidget extends StatelessWidget {
       ),
       onPressed: onTap,
       child: Text(
-        text,
+        text.i18n,
         style: TextStyle(fontSize: size),
       ),
     );

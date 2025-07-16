@@ -8,6 +8,7 @@ import 'package:app/mangment_products/application/product_state.dart';
 import 'package:app/mangment_products/application/providers/product_notifier_provider.dart';
 import 'package:app/mangment_products/domain/entities/product_entity.dart';
 import 'package:app/permissions/permission_handler.dart';
+import 'package:app/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
@@ -65,11 +66,11 @@ class EditProductScreen extends ConsumerWidget {
     });
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("تعديل المنتج"),
-        centerTitle: true,
-        elevation: 0,
-      ),
+      // appBar: AppBar(
+      //   title: const Text("تعديل المنتج"),
+      //   centerTitle: true,
+      //   elevation: 0,
+      // ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Card(
@@ -84,7 +85,7 @@ class EditProductScreen extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    "معلومات المنتج الأساسية",
+                    "Data Product".i18n,
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: theme.colorScheme.primary,
@@ -129,8 +130,8 @@ class EditProductScreen extends ConsumerWidget {
                           ElevatedButton.icon(
                             icon: const Icon(Icons.image),
                             label: Text(pickedImage == null
-                                ? 'اختيار صورة'
-                                : 'تغيير الصورة'),
+                                ? ' chess image'.i18n
+                                : 'update image'.i18n),
                             onPressed: () async {
                               final granted = await PermissionsRequester
                                   .requestCameraAndStoragePermissions();
@@ -243,8 +244,8 @@ class EditProductScreen extends ConsumerWidget {
                                   color: Colors.white,
                                 ),
                               )
-                            : const Text(
-                                'تعديل المنتج',
+                            : Text(
+                                'update product'.i18n,
                                 style: TextStyle(fontSize: 16),
                               ),
                       );
@@ -284,7 +285,7 @@ class EditProductScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildLabel("العملة"),
+              _buildLabel("currency"),
               const Gap(8),
               Directionality(
                 textDirection: TextDirection.ltr,
@@ -326,7 +327,7 @@ class EditProductScreen extends ConsumerWidget {
 
   Widget _buildLabel(String text) {
     return Text(
-      text,
+      text.i18n,
       style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
     );
   }

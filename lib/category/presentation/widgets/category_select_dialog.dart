@@ -1,4 +1,5 @@
 import 'package:app/category/application/providers/category_notifier_provider.dart';
+import 'package:app/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -57,16 +58,21 @@ class _CategorySelectDialogState extends ConsumerState<CategorySelectDialog> {
               ),
             ),
       actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: const Text("إلغاء"),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context, selectedCategory);
-          },
-          child: const Text("تطبيق"),
-        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text("cancel".i18n),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context, selectedCategory);
+              },
+              child: Text("Ok".i18n),
+            ),
+          ],
+        )
       ],
     );
   }

@@ -1,3 +1,4 @@
+import 'package:app/translations.dart';
 import 'package:flutter/material.dart';
 
 class ButtonWidget extends StatelessWidget {
@@ -34,7 +35,7 @@ class ButtonWidget extends StatelessWidget {
                 ),
               )
             : Text(
-                text,
+                text.i18n,
                 style: TextStyle(fontSize: 16),
               ),
       ),

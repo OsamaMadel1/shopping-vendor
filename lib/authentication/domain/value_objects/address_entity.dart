@@ -10,6 +10,6 @@ class AddressEntity {
     required this.street,
     required this.floor,
     required this.apartment,
-    required this.defaultAddress,
+    this.defaultAddress = true,
   });
 }

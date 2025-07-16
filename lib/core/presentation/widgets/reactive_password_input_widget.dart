@@ -1,3 +1,5 @@
+import 'package:app/core/presentation/widgets/wid/colors.dart';
+import 'package:app/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -26,13 +28,39 @@ class ReactivePasswordInputWidget extends ConsumerWidget {
       obscureText: !showText,
       formControlName: controllerName,
       decoration: InputDecoration(
-        labelStyle: TextStyle(color: Colors.teal[300]),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 18, // زيادة المساحة الرأسية
+        ),
+        floatingLabelBehavior: FloatingLabelBehavior.auto,
+        errorMaxLines: 3,
+        filled: true, // تفعيل الخلفية
+        fillColor: Colors.grey[100], // لون خلفية فاتح
+        labelStyle: TextStyle(
+          color: AppColor.kPrimaryColor,
+          fontWeight: FontWeight.bold, // خط عريض
+          fontSize: 16, // حجم أكبر للنص
+        ),
+
         prefixIcon: Icon(
           Icons.lock,
-          color: Colors.teal[300],
+          color: AppColor.kPrimaryColor,
         ),
-        labelText: hint,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        labelText: hint.i18n,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(
+            color: Colors.grey[400]!, // لون حدود أفتح
+            width: 1.5,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(
+            color: AppColor.kPrimaryColor, // لون حدود عند التركيز
+            width: 2,
+          ),
+        ),
         suffixIcon: showEye == true
             ? IconButton(
                 onPressed: () {
@@ -46,10 +74,10 @@ class ReactivePasswordInputWidget extends ConsumerWidget {
       ),
       validationMessages: validationMessages ??
           {
-            "required": (error) => "Required",
-            "email": (error) => "Email is not valid",
-            "minLength": (error) => "Too short",
-            'passwordMismatch': (error) => 'Passwords do not match'
+            "required": (error) => "Required".i18n,
+            "email": (error) => "Email is not valid".i18n,
+            "minLength": (error) => "Too short".i18n,
+            'passwordMismatch': (error) => 'Passwords do not match'.i18n
           },
     );
   }

@@ -1,7 +1,9 @@
 import 'package:app/authentication/domain/value_objects/gender_entity.dart';
-import 'package:app/core/presentation/widgets/reactiv_radio_list_tile_gender.dart';
-import 'package:app/core/presentation/widgets/reactive_date_picker_widget.dart';
+import 'package:app/core/presentation/widgets/reactive_dropdown_gender_widget.dart';
 import 'package:app/core/presentation/widgets/reactive_text_input_widget.dart';
+import 'package:app/core/presentation/widgets/text_widget.dart';
+import 'package:app/core/presentation/widgets/wid/colors.dart';
+import 'package:app/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -12,59 +14,51 @@ class PersonalInfoStep extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          children: [
-            Expanded(
-              child: ReactiveTextInputWidget(
-                hint: "First Name",
-                controllerName: "firstName",
-                prefixIcon: Icons.person,
-              ),
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: ReactiveTextInputWidget(
-                hint: "Last Name",
-                controllerName: "lastName",
-                prefixIcon: Icons.person,
-              ),
-            ),
-          ],
-        ),
-        const Gap(20),
-        ReactiveDatePickerWidget(controlName: "dateOfBirth"),
-        const Gap(20),
-        Align(
-          alignment: Alignment.centerLeft,
+        Center(
           child: Text(
-            "Gender",
+            'Personal Information'.i18n,
             style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: Colors.teal[700],
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: AppColor.kPrimaryColor,
             ),
           ),
         ),
-        const Gap(10),
-        Row(
-          children: const [
-            Expanded(
-              child: ReactivRadioListTileGender(
-                controlName: 'gender',
-                gender: GenderEntity.male,
-                label: 'Male',
-              ),
-            ),
-            Gap(10),
-            Expanded(
-              child: ReactivRadioListTileGender(
-                controlName: 'gender',
-                gender: GenderEntity.female,
-                label: 'Female',
-              ),
-            ),
-          ],
+        const Gap(20),
+        ReactiveTextInputWidget(
+          hint: "First Name",
+          controllerName: "firstName",
+          prefixIcon: Icons.person,
         ),
+        const Gap(20),
+        ReactiveTextInputWidget(
+          hint: "Last Name",
+          controllerName: "lastName",
+          prefixIcon: Icons.person,
+        ),
+        const Gap(20),
+        ReactiveDropdownGenderWidget<GenderEntity>(
+          controllerName: 'gender',
+          hintText: 'select gender ',
+          // prefixIcon: Icons.person_outline,
+          items: GenderEntity.values,
+          itemBuilder: (gender) => Row(
+            children: [
+              Icon(
+                gender == GenderEntity.male ? Icons.male : Icons.female,
+                color: AppColor.kPrimaryColor,
+              ),
+              const SizedBox(width: 8),
+              TextWidget(
+                text: gender == GenderEntity.male ? 'male' : 'femal',
+              ),
+            ],
+          ),
+          validationMessages: {
+            'required': (error) => 'يجب اختيار الجنس',
+          },
+        ),
+        Gap(5),
       ],
     );
   }

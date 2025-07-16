@@ -1,6 +1,7 @@
 import 'package:app/mangment_products/application/providers/get_product_by_id_provider.dart';
 import 'package:app/mangment_products/application/providers/product_notifier_provider.dart';
 import 'package:app/mangment_products/domain/entities/product_entity.dart';
+import 'package:app/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
@@ -18,7 +19,7 @@ class ProductDetailsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('تفاصيل المنتج'),
+        title: Center(child: Text('details product'.i18n)),
         centerTitle: true,
         elevation: 0,
       ),
@@ -79,14 +80,14 @@ class ProductDetailsScreen extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      product.name,
+                      product.name.i18n,
                     ),
                     Text(
                       '${NumberFormat.currency(locale: 'ar', symbol: product.currency).format(product.price)}',
                     ),
                     // ✅ التصنيف
                     Text(
-                      'الفئة: ${product.categoryName ?? "غير محددة"}',
+                      'categorey: ${product.categoryName ?? "not".i18n}',
                     ),
                   ],
                 ),
@@ -96,15 +97,15 @@ class ProductDetailsScreen extends ConsumerWidget {
                 // ✅ الوصف
                 Center(
                   child: Text(
-                    'الوصف',
+                    'desctiption'.i18n,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Center(
                   child: Text(
                     product.description.isNotEmpty
-                        ? product.description
-                        : 'لا يوجد وصف متاح',
+                        ? product.description.i18n
+                        : 'not desctiption'.i18n,
                   ),
                 ),
 
@@ -117,7 +118,7 @@ class ProductDetailsScreen extends ConsumerWidget {
                       child: FilledButton.icon(
                         onPressed: () => _editProduct(context, product),
                         icon: const Icon(Icons.edit_outlined),
-                        label: const Text('تعديل'),
+                        label: Text('update'.i18n),
                         style: FilledButton.styleFrom(
                           backgroundColor: Colors.orange[700],
                           padding: const EdgeInsets.symmetric(vertical: 16),
@@ -133,7 +134,7 @@ class ProductDetailsScreen extends ConsumerWidget {
                         onPressed: () =>
                             _confirmDeleteProduct(context, ref, product.id!),
                         icon: const Icon(Icons.delete_outline),
-                        label: const Text('حذف'),
+                        label: Text('delete'.i18n),
                         style: FilledButton.styleFrom(
                           backgroundColor: Colors.red[700],
                           padding: const EdgeInsets.symmetric(vertical: 16),
@@ -163,12 +164,12 @@ class ProductDetailsScreen extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('حذف المنتج'),
-        content: const Text('هل أنت متأكد من حذف هذا المنتج؟'),
+        title: Text('deltete product'.i18n),
+        content: Text('هل أنت متأكد من حذف هذا المنتج؟'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('إلغاء'),
+            child: Text('cancel'.i18n),
           ),
           TextButton(
             onPressed: () {
@@ -179,7 +180,7 @@ class ProductDetailsScreen extends ConsumerWidget {
                 const SnackBar(content: Text('تم حذف المنتج')),
               );
             },
-            child: const Text('حذف', style: TextStyle(color: Colors.red)),
+            child: Text('delete', style: TextStyle(color: Colors.red)),
           ),
         ],
       ),

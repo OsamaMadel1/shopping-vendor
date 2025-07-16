@@ -8,6 +8,7 @@ import 'package:app/mangment_products/application/providers/add_product_form_pro
 import 'package:app/mangment_products/application/providers/product_notifier_provider.dart';
 import 'package:app/mangment_products/domain/entities/product_entity.dart';
 import 'package:app/permissions/permission_handler.dart';
+import 'package:app/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
@@ -48,11 +49,11 @@ class AddProductScreen extends ConsumerWidget {
     });
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("إضافة منتج جديد"),
-        centerTitle: true,
-        elevation: 0,
-      ),
+      // appBar: AppBar(
+      //   title: Center(child: const Text("add product")),
+      //   centerTitle: true,
+      //   elevation: 0,
+      // ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -70,20 +71,22 @@ class AddProductScreen extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text(
-                        "معلومات المنتج الأساسية",
-                        style: theme.textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: theme.colorScheme.primary,
+                      Center(
+                        child: Text(
+                          "Data Product".i18n,
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: theme.colorScheme.primary,
+                          ),
                         ),
                       ),
                       const Divider(height: 24),
 
                       // اسم المنتج
-                      _buildLabel("اسم المنتج"),
+                      _buildLabel("name product"),
                       const Gap(8),
                       ReactiveTextInputWidget(
-                        hint: 'أدخل اسم المنتج',
+                        hint: 'enter name product',
                         controllerName: 'nameProduct',
                         prefixIcon: Icons.shopping_bag_outlined,
                       ),
@@ -94,14 +97,14 @@ class AddProductScreen extends ConsumerWidget {
                       const Gap(16),
 
                       // الفئة
-                      _buildLabel("الفئة"),
+                      _buildLabel("categroy"),
                       const Gap(8),
                       Row(
                         children: const [
                           Expanded(
                             child: CategoryDropdown(
                               formControlName: "categoryId",
-                              labelText: "اختر الفئة",
+                              labelText: "chess categroy ",
                             ),
                           ),
                           SizedBox(width: 8),
@@ -110,10 +113,10 @@ class AddProductScreen extends ConsumerWidget {
                       ),
                       const Gap(16),
                       // الوصف
-                      _buildLabel("وصف المنتج"),
+                      _buildLabel("product description"),
                       const Gap(8),
                       ReactiveTextInputWidget(
-                        hint: 'أدخل وصفاً للمنتج',
+                        hint: 'enter descriotion product',
                         controllerName: 'descriptionProduct',
                         prefixIcon: Icons.description_outlined,
                       ),
@@ -130,7 +133,7 @@ class AddProductScreen extends ConsumerWidget {
                             children: [
                               ElevatedButton.icon(
                                 icon: const Icon(Icons.image),
-                                label: Text('اختيار صورة'),
+                                label: Text('chess image'.i18n),
                                 onPressed: () async {
                                   // طلب صلاحيات الكاميرا والتخزين
                                   bool granted = await PermissionsRequester
@@ -188,7 +191,7 @@ class AddProductScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildLabel("السعر"),
+              _buildLabel("price"),
               const Gap(8),
               ReactiveTextInputWidget(
                 hint: '0.00',
@@ -203,7 +206,7 @@ class AddProductScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildLabel("العملة"),
+              _buildLabel("currency"),
               const Gap(8),
               Directionality(
                 textDirection: TextDirection.ltr,
@@ -316,8 +319,8 @@ class AddProductScreen extends ConsumerWidget {
                     color: Colors.white,
                   ),
                 )
-              : const Text(
-                  'إضافة المنتج',
+              : Text(
+                  'add product'.i18n,
                   style: TextStyle(fontSize: 16),
                 ),
         );
@@ -327,7 +330,7 @@ class AddProductScreen extends ConsumerWidget {
 
   Widget _buildLabel(String text) {
     return Text(
-      text,
+      text.i18n,
       style: const TextStyle(
         fontWeight: FontWeight.w500,
         fontSize: 14,
